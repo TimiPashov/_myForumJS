@@ -1,0 +1,39 @@
+.header {
+    padding: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home a {
+    text-decoration: none;
+    font-size: 2em;
+    font-style: italic;
+    font-weight: bold;
+    color: black;
+}
+
+.home a span {
+    color: orangered;
+}
+
+.nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2em;
+    list-style: none;
+
+}
+
+.nav ul li a {
+    text-decoration: none;
+    font-size: 1.5em;
+    color: black;
+    transition: transform 0.1s ease-in;
+    display: inline-block;
+}
+
+.nav ul li a:hover {
+    transform: scale(1.2);
+}
