@@ -1,7 +1,7 @@
-# _myForumJS
-Angular&amp;TypeScript project defense for SoftUni
+
 
 # MyForumJS
+Angular&amp;TypeScript project defense for SoftUni
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
 
