@@ -3,18 +3,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #FAD832;
+}
+
+.home {
+    margin-left: 5em;
 }
 
 .home a {
     text-decoration: none;
-    font-size: 2em;
+    font-size: 2.5em;
     font-style: italic;
     font-weight: bold;
     color: black;
 }
 
 .home a span {
-    color: orangered;
+    color: #FBFEF9;
+    font-size: 1.5em;
+    font-style: italic;
+    font-family: "Fira Code";
+}
+
+.nav {
+    margin-right: 5em;
 }
 
 .nav ul {
@@ -36,4 +48,5 @@
 
 .nav ul li a:hover {
     transform: scale(1.2);
+    color: #FBFEF9;
 }

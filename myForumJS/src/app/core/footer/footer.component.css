@@ -8,7 +8,6 @@
     transform: translateX(-50%);
     width: calc(100% - 2em); /* Account for padding */
     max-width: 1920px; /* Set max-width to match body */
-
 }
 
 .home{
