@@ -18,9 +18,19 @@ export class PostsComponent implements OnInit, OnDestroy {
   isloading: boolean = true;
 
   ngOnInit(): void {
-    this.subscription = this.api.getPosts(5).subscribe(posts => {
-      this.posts = posts;
-      this.isloading = false;
+    // this.subscription = this.api.getPosts(5).subscribe(posts => {
+    //   this.posts = posts;
+    //   this.isloading = false;
+    // })
+    this.subscription = this.api.getPosts(5).subscribe({
+      next: (posts) => {
+        this.posts = posts;
+        this.isloading = false;
+      },
+      error: (err) => {
+        this.isloading = false;
+        console.error('Error:', err);
+      }
     })
   }
 
