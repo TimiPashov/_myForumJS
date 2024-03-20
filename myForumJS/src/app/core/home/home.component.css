@@ -12,11 +12,12 @@ aside {
     width: 100%;
     margin: auto;
     padding: 3em;
-    padding-bottom: 4.5em;
+    padding-bottom: 6em;
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
     gap: 2em;
+    height: 100vh;
 }
 
 .themes-container {

@@ -2,12 +2,13 @@
     padding: 2em;
     display: flex;
     justify-content: center;
-    position: relative;
-    bottom: 0;
+    position: absolute;
+    /* bottom: 0; */
     left: 50%;
+    margin-top: 3em;
     transform: translateX(-50%);
-    width: calc(100% - 2em); /* Account for padding */
-    max-width: 1920px; /* Set max-width to match body */
+    width: calc(100%); /* Account for padding */
+    max-width: 1930px; /* Set max-width to match body */
     background-color: #FAD832;
 }
 
