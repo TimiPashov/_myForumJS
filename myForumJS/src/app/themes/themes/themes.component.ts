@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/api.service';
+import { Theme } from 'src/app/types/theme';
 
 @Component({
   selector: 'app-themes',
   templateUrl: './themes.component.html',
   styleUrls: ['./themes.component.css']
 })
-export class ThemesComponent implements OnInit {
+export class ThemesComponent implements OnInit, OnDestroy {
   constructor(private api: ApiService) { }
 
+  themes: Theme[] = [];
+  private subscription = {} as Subscription;
+
   ngOnInit(): void {
-    this.api.getThemes().subscribe(themes => console.log(themes));
+    this.subscription = this.api.getThemes().subscribe(themes => this.themes = themes);
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 }
