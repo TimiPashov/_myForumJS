@@ -16,7 +16,6 @@ import { ThemesModule } from '../themes/themes.module';
   ],
   imports: [
     CommonModule,
-    SharedModule,
     ThemesModule
   ],
   exports:[

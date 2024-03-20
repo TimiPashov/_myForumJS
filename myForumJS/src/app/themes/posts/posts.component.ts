@@ -15,13 +15,17 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   private subscription = {} as Subscription;
   posts: Post[] = [];
+  isloading: boolean = true;
 
   ngOnInit(): void {
-    this.subscription = this.api.getPosts(5).subscribe(posts => this.posts = posts)
+    this.subscription = this.api.getPosts(5).subscribe(posts => {
+      this.posts = posts;
+      this.isloading = false;
+    })
   }
 
   ngOnDestroy(): void {
-    if(this.subscription){
+    if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }

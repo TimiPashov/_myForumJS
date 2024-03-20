@@ -13,13 +13,17 @@ export class ThemesComponent implements OnInit, OnDestroy {
 
   themes: Theme[] = [];
   private subscription = {} as Subscription;
+  isLoading: boolean = true;
 
   ngOnInit(): void {
-    this.subscription = this.api.getThemes().subscribe(themes => this.themes = themes);
+    this.subscription = this.api.getThemes().subscribe(themes => {
+      this.themes = themes;
+      this.isLoading = false;
+    });
   }
 
   ngOnDestroy(): void {
-    if(this.subscription){
+    if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }

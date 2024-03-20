@@ -11,6 +11,6 @@ import { LoaderComponent } from './loader/loader.component';
   imports: [
     CommonModule
   ],
-  exports:[]
+  exports:[LoaderComponent]
 })
 export class SharedModule { }

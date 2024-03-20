@@ -1,7 +1,7 @@
 <main>
+    <app-loader *ngIf="isLoading" class="app-loader" />
             <div class="theme-title">
-                
-                <!-- theme component  -->
+   
                 <div *ngFor="let theme of themes" class="theme-container">
                     <div class="theme-name-wrapper">
                         <div class="theme-name">
