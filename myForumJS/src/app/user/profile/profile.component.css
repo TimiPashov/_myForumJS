@@ -1,0 +1,42 @@
+.container {
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+
+.profile {
+    /* border: 1px solid black; */
+    padding: 2em;
+    border-radius: 0.4em;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.5);
+}
+
+img {
+    max-height: 10em;
+    align-self: center;
+    max-width: 10em;
+    margin-bottom: 1em;
+}
+
+.container button {
+    margin: 0 auto;
+    padding: 0.5em 2em;
+    /* width: 50%; */
+    border-radius: 0.4em;
+    font: 0.7em "Fira Code";
+}
+
+.flex {
+    display: flex;
+    gap: 1.2em;
+    margin: 1em 0;
+}
+.btns {
+    display: flex;
+}

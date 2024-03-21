@@ -13,17 +13,19 @@ input {
 }
 
 form>div {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 0.4em;
     padding: 1em;
     display: flex;
     flex-direction: column;
     gap: 1em;
+    box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.5);
 }
 
 .login-btn {
     margin: 0 auto;
-    padding: 0.2em 2em;
-    width: 50%;
+    padding: 1em 2em;
+    /* width: 50%; */
     border-radius: 0.4em;
+    font: 0.7em "Fira Code";
 }
