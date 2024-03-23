@@ -21,7 +21,6 @@ export class HeaderComponent {
   }
 
   logout() {
-    console.log('asdasd');
 
     return this.userService.logout().subscribe({
       next: () => this.router.navigate(['/login'])
