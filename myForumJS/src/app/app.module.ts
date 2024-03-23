@@ -8,11 +8,14 @@ import { HttpClientModule } from '@angular/common/http'
 import { ThemesModule } from './themes/themes.module';
 import { ThemeRoutingModule } from './themes/theme-routing.module';
 import { appInterceptorProvider } from './app.interceptor';
+import { AuthenticatorComponent } from './authenticator/authenticator.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthenticatorComponent,
 
   ],
   imports: [
@@ -20,6 +23,7 @@ import { appInterceptorProvider } from './app.interceptor';
     CoreModule,
     HttpClientModule,
     ThemesModule,
+    SharedModule,
     AppRoutingModule,
     ThemeRoutingModule
   ],
