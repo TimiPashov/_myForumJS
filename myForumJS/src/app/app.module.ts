@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { UserModule } from './user/user.module';
 import { ThemesModule } from './themes/themes.module';
 import { ThemeRoutingModule } from './themes/theme-routing.module';
+import { appInterceptorProvider } from './app.interceptor';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { ThemeRoutingModule } from './themes/theme-routing.module';
     AppRoutingModule,
     ThemeRoutingModule
   ],
-  providers: [],
+  providers: [appInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

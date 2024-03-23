@@ -29,3 +29,8 @@ form>div {
     border-radius: 0.4em;
     font: 0.7em "Fira Code";
 }
+
+.error {
+    color: red;
+    font-size: 0.7em;
+}

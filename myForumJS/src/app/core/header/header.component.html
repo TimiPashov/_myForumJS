@@ -5,11 +5,15 @@
     <nav class="nav">
         <ul>
             <li><a routerLink="/">Home</a></li>
-            <li><a routerLink="/profile">Profile</a></li>
             <li><a routerLink="/themes">Themes</a></li>
-            <li><a routerLink="/login">Login</a></li>
-            <li><a routerLink="/register">Register</a></li>
-            <li><a routerLink="/logout">Logout</a></li>
+            <ng-container *ngIf="isLoggedIn">
+                <li><a routerLink="/profile">{{firstName}}'s Profile</a></li>
+                <li (click)="logout()"><a href="javascript:void(0)">Logout</a></li>
+            </ng-container>
+            <ng-container *ngIf="!isLoggedIn">
+                <li><a routerLink="/login">Login</a></li>
+                <li><a routerLink="/register">Register</a></li>
+            </ng-container>
         </ul>
     </nav>
 </header>
