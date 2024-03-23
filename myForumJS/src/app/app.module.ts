@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http'
-import { UserModule } from './user/user.module';
 import { ThemesModule } from './themes/themes.module';
 import { ThemeRoutingModule } from './themes/theme-routing.module';
 import { appInterceptorProvider } from './app.interceptor';
@@ -20,7 +19,6 @@ import { appInterceptorProvider } from './app.interceptor';
     BrowserModule,
     CoreModule,
     HttpClientModule,
-    UserModule,
     ThemesModule,
     AppRoutingModule,
     ThemeRoutingModule

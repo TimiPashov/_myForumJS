@@ -23,7 +23,7 @@ export class HeaderComponent {
   logout() {
 
     return this.userService.logout().subscribe({
-      next: () => this.router.navigate(['/login'])
+      next: () => this.router.navigate(['/auth/login'])
     })
   }
 }
