@@ -19,9 +19,13 @@ export class ApiService {
     return this.http.get<Theme[]>(`${this.apiUrl}/themes`);
   }
 
+  getTheme(themeId: string | null) {
+    return this.http.get<Theme>(`${this.apiUrl}/themes/${themeId}`)
+  }
+
   getPosts(limit?: number) {
     let url = `${this.apiUrl}/posts`;
-    if(limit){
+    if (limit) {
       url += `?limit=${limit}`
     }
     return this.http.get<Post[]>(`${url}`)
