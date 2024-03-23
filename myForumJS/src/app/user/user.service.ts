@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthUser } from '../types/user';
 import { BehaviorSubject, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class UserService {
     return !!this.user
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.user$.subscribe((user) => {
       this.user = user;
     })
@@ -31,9 +32,29 @@ export class UserService {
       .pipe(tap((user) => this.user$$.next(user)))
   }
 
-  logout(){
+  register(
+    username: string,
+    email: string,
+    password: string,
+    rePassword: string,
+    tel: string,
+  ) {
+    return this.http.post<AuthUser>('/api/register', {
+      username,
+      email,
+      password,
+      rePassword,
+      tel,
+    })
+      .pipe(tap((user) => {
+        this.user$$.next(user)
+        this.router.navigate(['/themes'])
+      }))
+  }
+
+  logout() {
     return this.http
-    .post('/api/logout', {})
-    .pipe(tap((user) => this.user$$.next(undefined)));
+      .post('/api/logout', {})
+      .pipe(tap((user) => this.user$$.next(undefined)));
   }
 }
