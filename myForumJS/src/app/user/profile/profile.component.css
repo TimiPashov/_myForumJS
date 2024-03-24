@@ -50,6 +50,10 @@ input{
  margin-left: 43px;
  
 }
+
+button:hover{
+    text-decoration: underline;
+}
 /* .edit-error {
     font-size: 0.7em;
 } */
