@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { AuthUser } from 'src/app/types/user';
 import { FormBuilder } from '@angular/forms';
-import { pipe } from 'rxjs';
+import { ProfileDetailsUser } from 'src/app/types/user';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +12,11 @@ export class ProfileComponent implements OnInit {
 
   editView: boolean = false;
 
-  user = {} as AuthUser;
+  user: ProfileDetailsUser = {
+    username: '',
+    email: '',
+    tel: ''
+  }
 
   form = this.formBuilder.group({
     username: [''],
@@ -26,24 +29,21 @@ export class ProfileComponent implements OnInit {
 
 
   togleEddit() {
-    this.userService.getProfile().subscribe(
-      pipe(user => {
-        this.user = user
-        this.editView = !this.editView;
-        this.form.setValue({
-          username: user.username,
-          email: user.email,
-          tel: user.tel
-        })
-      })
-    )
-
+    this.editView = !this.editView;
   }
 
   ngOnInit(): void {
-    this.userService.getProfile().subscribe(
-      pipe(user => this.user = user)
-    )
-  }
+    const { username, email, tel } = this.userService.user!
+    this.user = {
+      username,
+      email,
+      tel
+    }
 
+    this.form.setValue({
+      username,
+      email,
+      tel
+    })
+  }
 }

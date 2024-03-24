@@ -21,3 +21,9 @@ export interface AuthUser {
         rePassword: string,
         id: string
 }
+
+export interface ProfileDetailsUser {
+        username: string,
+        email: string,
+        tel: string,
+}
