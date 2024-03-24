@@ -1,23 +1,55 @@
 <div class="container">
-    <div class="profile"><img src="../../../assets/profile.png" alt="default user">
-        <h3>User Info:</h3>
-        <div class="flex">
-            <p>Username: </p>
-            <p>{{user?.username}}</p>
-        </div>
-        <div class="flex">
-            <p>Email: </p>
-            <p>{{user?.email}}</p>
-        </div>
-        <div class="flex">
-            <p>Phone: </p>
-            <p>{{user?.tel}}</p>
-        </div>
-        <div class="btns">
+    <ng-container *ngIf="!editView">
+        <div class="profile"><img src="../../../assets/profile.png" alt="default user">
+            <h3>User Info:</h3>
+            <div class="flex">
+                <p>Username: </p>
+                <p>{{user.username}}</p>
+            </div>
+            <div class="flex">
+                <p>Email: </p>
+                <p>{{user.email}}</p>
+            </div>
+            <div class="flex">
+                <p>Phone: </p>
+                <p>{{user.tel}}</p>
+            </div>
+            <div class="btns">
 
-            <button class="back-btn">Back</button>
-            <button class="edit-button">Edit</button>
+                <a class="back-btn" routerLink="/themes">Back</a>
+                <button class="edit-button" (click)="togleEddit()">Edit</button>
+            </div>
         </div>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="editView">
+        <form [formGroup]="form">
+
+            <div class="profile"><img src="../../../assets/profile.png" alt="default user">
+                <h3>User Info:</h3>
+                <div class="flex">
+                    <p>Username: </p>
+                    <label for="username"></label>
+                    <input type="text" name="username" id="username" placeholder="Johny" [value]="user.username"  formControlName="username">
+                    <!-- <p class="edit-error">
+                        Username is required!
+                    </p> -->
+                </div>
+                <div class="flex phone">
+                    <p>Email: </p>
+                    <label for="email"></label>
+                    <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" [value]="user.email" formControlName="email">
+                </div>
+                <div class="flex phone">
+                    <p>Phone: </p>
+                    <label for="tel"></label>
+                    <input type="tel" name="tel" id="tel" placeholder="123-123-123" [value]="user.tel" formControlName="tel">
+                </div>
+                <div class="btns">
+
+                    <button class="back-btn" (click)="togleEddit()">Back</button>
+                    <button class="edit-button">Save</button>
+                </div>
+            </div>
+        </form>
+    </ng-container>
 </div>
-

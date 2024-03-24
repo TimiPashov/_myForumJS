@@ -1,18 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { AuthUser } from 'src/app/types/user';
+import { FormBuilder } from '@angular/forms';
+import { pipe } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  editView: boolean = false;
 
-  get user(): AuthUser | undefined {
-    return this.userService.user || undefined;
-  } 
+  user = {} as AuthUser;
+
+  form = this.formBuilder.group({
+    username: [''],
+    email: [''],
+    tel: ['']
+  });
+
+  constructor(private userService: UserService, private formBuilder: FormBuilder) { }
+
+
+
+  togleEddit() {
+    this.userService.getProfile().subscribe(
+      pipe(user => {
+        this.user = user
+        this.editView = !this.editView;
+        this.form.setValue({
+          username: user.username,
+          email: user.email,
+          tel: user.tel
+        })
+      })
+    )
+
+  }
+
+  ngOnInit(): void {
+    this.userService.getProfile().subscribe(
+      pipe(user => this.user = user)
+    )
+  }
 
 }

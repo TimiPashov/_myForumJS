@@ -36,7 +36,20 @@ img {
     display: flex;
     gap: 1.2em;
     margin: 1em 0;
+    /* flex-direction: column; */
 }
 .btns {
     display: flex;
 }
+
+input{
+    padding: 1em;
+}
+
+.phone >input{
+ margin-left: 43px;
+ 
+}
+/* .edit-error {
+    font-size: 0.7em;
+} */
