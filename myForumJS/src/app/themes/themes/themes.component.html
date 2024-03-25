@@ -1,28 +1,28 @@
 <main>
     <app-loader *ngIf="isLoading" class="app-loader" />
-            <div class="theme-title">
-   
-                <div *ngFor="let theme of themes" class="theme-container">
-                    <div class="theme-name-wrapper">
-                        <div class="theme-name">
-                            <a routerLink={{theme._id}} class="normal">
-                                <h2>{{theme.themeName}}</h2>
-                            </a>
-                            <div class="columns">
-                                <div>
-                                    <div class="nick-name">
-                                        <p>Username: <span>{{theme.userId.username}}</span></p>
-                                    </div>
-                                    <p>Date: <time>{{theme.created_at}}</time></p>
-                                </div>
-                                <div class="subscribers">
-                                    <!-- <button class="subscribe">Subscribe</button> -->
-                                    <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
-                                </div>
+    <div class="theme-title">
+
+        <div *ngFor="let theme of themes" class="theme-container">
+            <div class="theme-name-wrapper">
+                <div class="theme-name">
+                    <a routerLink={{theme._id}} class="normal">
+                        <h2>{{theme.themeName}}</h2>
+                    </a>
+                    <div class="columns">
+                        <div>
+                            <div class="nick-name">
+                                <p>Username: <span>{{theme.userId.username}}</span></p>
                             </div>
+                            <p>Date: <time>{{theme.created_at | dateTransform}}</time></p>
+                        </div>
+                        <div class="subscribers">
+                            <!-- <button class="subscribe">Subscribe</button> -->
+                            <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
                         </div>
                     </div>
                 </div>
-                
             </div>
-        </main>
+        </div>
+
+    </div>
+</main>

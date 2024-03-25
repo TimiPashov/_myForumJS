@@ -4,6 +4,8 @@ import { LoaderComponent } from './loader/loader.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { RouterModule } from '@angular/router';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { DateTransformPipe } from './pipes/date-transform.pipe';
 
 
 
@@ -11,12 +13,14 @@ import { RouterModule } from '@angular/router';
   declarations: [
     LoaderComponent,
     ErrorPageComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    TimeAgoPipe,
+    DateTransformPipe
   ],
   imports: [
     CommonModule,
     RouterModule
   ],
-  exports:[LoaderComponent]
+  exports:[LoaderComponent, TimeAgoPipe, DateTransformPipe]
 })
 export class SharedModule { }
