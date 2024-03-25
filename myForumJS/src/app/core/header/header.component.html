@@ -1,10 +1,10 @@
 <header class="header">
     <div class="home">
-        <a routerLink="/themes">_myForum<span>JS</span></a>
+        <a routerLink="/home">_myForum<span>JS</span></a>
     </div>
     <nav class="nav">
         <ul>
-            <li><a routerLink="/">Home</a></li>
+            <li><a routerLink="/home">Home</a></li>
             <li><a routerLink="/themes">Themes</a></li>
             <ng-container *ngIf="isLoggedIn">
                 <li><a routerLink="/auth/profile">{{firstName}}'s Profile</a></li>

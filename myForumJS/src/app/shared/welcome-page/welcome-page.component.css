@@ -1,0 +1,55 @@
+.container {
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  
+  .welcome-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border-radius: 0.4em;
+    padding: 2em 3em;
+    max-width: 50%;
+    text-align: center;
+    box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.5);
+  }
+  
+  .welcome-card h3 {
+    margin: 2em 2em;
+    font-size: 2em;
+    text-align: center;
+  }
+
+  .welcome-card p {
+    line-height: 1.5;
+  }
+  
+  .btns {
+    display: flex;
+    margin-top: 5em;
+    margin-bottom: 2em;
+    align-self: center;
+    gap: 2em;
+    justify-content: space-around;
+    width: 100%
+  }
+  
+  .btns a {
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+
+    border-radius: 0.4em;
+    padding: 0.7em;
+    max-width: 10em;
+    text-decoration: none;
+    color: black;
+  }
+
+  .btns a:hover {
+    box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.5);
+    border: none;
+  }
