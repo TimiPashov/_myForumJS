@@ -16,7 +16,6 @@ export class CurrentThemeComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.api.getTheme(params.get('themeId')).subscribe(theme => {
-        console.log(theme)
         this.theme = theme;
       })
     })

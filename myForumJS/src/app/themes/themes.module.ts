@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ThemeRoutingModule } from './theme-routing.module';
 import { CurrentThemeComponent } from './current-theme/current-theme.component';
 import { RouterModule } from '@angular/router';
+import { AddThemeComponent } from './add-theme/add-theme.component';
 
 
 
@@ -14,6 +15,7 @@ import { RouterModule } from '@angular/router';
     ThemesComponent,
     PostsComponent,
     CurrentThemeComponent,
+    AddThemeComponent,
 ],
   imports: [
     CommonModule,
@@ -21,6 +23,6 @@ import { RouterModule } from '@angular/router';
     ThemeRoutingModule,
     RouterModule
   ],
-  exports: [ThemesComponent, PostsComponent, CurrentThemeComponent]
+  exports: [ThemesComponent, PostsComponent, CurrentThemeComponent, AddThemeComponent]
 })
 export class ThemesModule { }
