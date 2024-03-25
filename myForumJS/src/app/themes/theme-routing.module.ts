@@ -12,7 +12,7 @@ const routes: Routes = [
         path: 'themes', children: [
             { path: '', pathMatch: 'full', component: HomeComponent },
             { path: 'add-theme', component: AddThemeComponent, canActivate: [IsLoggedInGuard] },
-            { path: ':themeId', component: CurrentThemeComponent },
+            { path: ':themeId', component: CurrentThemeComponent, canActivate: [IsLoggedInGuard] },
 
 
         ]
