@@ -33,10 +33,10 @@
         </div>
     </div>
     <div class="answer-comment">
-        <p><span>currentUser</span> comment:</p>
+        <p><span>{{user.username}}</span> comment:</p>
         <div class="answer">
-            <form>
-                <textarea name="postText" id="comment" cols="30" rows="10"></textarea>
+            <form [formGroup]="form" (ngSubmit)="addPost()">
+                <textarea name="postText" id="comment" cols="30" rows="10" formControlName="postText"></textarea>
                 <button>Post</button>
             </form>
         </div>

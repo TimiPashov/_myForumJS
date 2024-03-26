@@ -33,4 +33,8 @@ export class ApiService {
     }
     return this.http.get<Post[]>(`${url}`)
   }
+
+  createPost(postText: string, postId: string) {
+    return this.http.post(`/api/themes/${postId}`, { postText });
+  }
 }
