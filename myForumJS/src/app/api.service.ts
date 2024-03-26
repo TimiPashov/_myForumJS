@@ -35,6 +35,6 @@ export class ApiService {
   }
 
   createPost(postText: string, postId: string) {
-    return this.http.post(`/api/themes/${postId}`, { postText });
+    return this.http.post<Theme>(`/api/themes/${postId}`, { postText });
   }
 }

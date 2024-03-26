@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Theme } from 'src/app/types/theme';
 import { ProfileDetailsUser } from 'src/app/types/user';
@@ -12,7 +12,7 @@ import { UserService } from 'src/app/user/user.service';
   styleUrls: ['./current-theme.component.css']
 })
 export class CurrentThemeComponent implements OnInit {
-  constructor(private api: ApiService, private route: ActivatedRoute, private fb: FormBuilder, private userService: UserService) { }
+  constructor(private api: ApiService, private route: ActivatedRoute, private fb: FormBuilder, private userService: UserService, private router: Router) { }
 
 
   theme = {} as Theme;
@@ -32,8 +32,11 @@ export class CurrentThemeComponent implements OnInit {
       return;
     }
 
-
-    return this.api.createPost(this.form.value.postText!, this.theme._id).subscribe(res => console.log(res))
+    return this.api.createPost(this.form.value.postText!, this.theme._id).subscribe((theme) => {
+      this.api.getTheme(theme._id).subscribe(theme => this.theme = theme) ;
+      this.form.reset();
+    })
+    
   }
 
   ngOnInit(): void {
