@@ -17,7 +17,7 @@ aside {
     align-items: flex-start;
     justify-content: space-evenly;
     gap: 2em;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .themes-container {

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { }
 
   form = this.fb.group({
 
@@ -25,13 +26,12 @@ export class RegisterComponent {
   //   return this.form.get('passGroup');
   // }
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { }
 
   register(): void {
     if (this.form.invalid) {
       return;
     }
-    console.log(this.form.value);
+
 
     const {
       username,

@@ -22,6 +22,10 @@ export class ApiService {
     return this.http.get<Theme>(`/api/themes/${themeId}`)
   }
 
+  createTheme(themeName: string, postText: string) {
+    return this.http.post<Theme>(`/api/themes`, { themeName, postText })
+  }
+
   getPosts(limit?: number) {
     let url = `/api/posts`;
     if (limit) {

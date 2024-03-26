@@ -8,8 +8,7 @@ import { UserService } from "src/app/user/user.service";
 export class IsLoggedInGuard implements CanActivate {
     constructor(private userService: UserService, private router: Router) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        console.log(route.url[0]);
-        console.log(this.userService.isLoggedIn);
+
 
         if ((route.url[0].path === 'login' || route.url[0].path === 'register') && this.userService.isLoggedIn === false) {
 

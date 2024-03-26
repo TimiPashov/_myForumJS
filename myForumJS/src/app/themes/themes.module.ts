@@ -7,6 +7,7 @@ import { ThemeRoutingModule } from './theme-routing.module';
 import { CurrentThemeComponent } from './current-theme/current-theme.component';
 import { RouterModule } from '@angular/router';
 import { AddThemeComponent } from './add-theme/add-theme.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -20,6 +21,7 @@ import { AddThemeComponent } from './add-theme/add-theme.component';
   imports: [
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
     ThemeRoutingModule,
     RouterModule
   ],
