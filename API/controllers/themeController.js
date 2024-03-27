@@ -13,11 +13,11 @@ function getTheme(req, res, next) {
 
     themeModel.findById(themeId)
         .populate({
-            path : 'posts',
-            populate : {
-              path : 'userId'
+            path: 'posts',
+            populate: {
+                path: 'userId'
             }
-          })
+        })
         .then(theme => res.json(theme))
         .catch(next);
 }
@@ -45,9 +45,21 @@ function subscribe(req, res, next) {
         .catch(next);
 }
 
+function unSubscribe(req, res, next) {
+    console.log('User from server: ', req.user);
+    const themeId = req.params.themeId;
+    const { _id: userId } = req.user;
+    themeModel.findByIdAndUpdate({ _id: themeId }, { $pull: { subscribers: userId } }, { new: true })
+        .then(updatedTheme => {
+            res.status(200).json(updatedTheme)
+        })
+        .catch(next);
+}
+
 module.exports = {
     getThemes,
     createTheme,
     getTheme,
     subscribe,
+    unSubscribe
 }
