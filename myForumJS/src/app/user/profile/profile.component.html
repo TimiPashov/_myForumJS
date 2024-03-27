@@ -4,15 +4,15 @@
             <h3>User Info:</h3>
             <div class="flex">
                 <p>Username: </p>
-                <p>{{user.username}}</p>
+                <p>{{profileUser.username}}</p>
             </div>
             <div class="flex">
                 <p>Email: </p>
-                <p>{{user.email}}</p>
+                <p>{{profileUser.email}}</p>
             </div>
             <div class="flex">
                 <p>Phone: </p>
-                <p>{{user.tel}}</p>
+                <p>{{profileUser.tel}}</p>
             </div>
             <div class="btns">
 
@@ -29,7 +29,7 @@
                 <div class="flex">
                     <p>Username: </p>
                     <label for="username"></label>
-                    <input type="text" name="username" id="username" placeholder="Johny" [value]="user.username"  formControlName="username">
+                    <input type="text" name="username" id="username" placeholder="Johny" [value]="profileUser.username"  formControlName="username">
                     <!-- <p class="edit-error">
                         Username is required!
                     </p> -->
@@ -37,12 +37,12 @@
                 <div class="flex phone">
                     <p>Email: </p>
                     <label for="email"></label>
-                    <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" [value]="user.email" formControlName="email">
+                    <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" [value]="profileUser.email" formControlName="email">
                 </div>
                 <div class="flex phone">
                     <p>Phone: </p>
                     <label for="tel"></label>
-                    <input type="tel" name="tel" id="tel" placeholder="123-123-123" [value]="user.tel" formControlName="tel">
+                    <input type="tel" name="tel" id="tel" placeholder="123-123-123" [value]="profileUser.tel" formControlName="tel">
                 </div>
                 <div class="btns">
 

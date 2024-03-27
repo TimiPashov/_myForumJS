@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfileDetailsUser } from 'src/app/types/user';
-import { tap } from 'rxjs';
+
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
 
   editView: boolean = false;
 
-  user: ProfileDetailsUser = {
+  profileUser: ProfileDetailsUser = {
     username: '',
     email: '',
     tel: ''
@@ -38,8 +38,8 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.user = this.form.value as ProfileDetailsUser;
-    const { username, email, tel } = this.user;
+    this.profileUser = this.form.value as ProfileDetailsUser;
+    const { username, email, tel } = this.profileUser;
 
     this.userService.updateProfile(username, email, tel).subscribe(()=>{
       this.togleEddit();
@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const { username, email, tel } = this.userService.user!
-    this.user = {
+    this.profileUser = {
       username,
       email,
       tel
