@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ProfileDetailsUser } from 'src/app/types/user';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -19,8 +20,8 @@ export class ProfileComponent implements OnInit {
   }
 
   form = this.formBuilder.group({
-    username: [''],
-    email: [''],
+    username: ['', [Validators.required]],
+    email: ['', [Validators.required]],
     tel: ['']
   });
 
@@ -28,8 +29,21 @@ export class ProfileComponent implements OnInit {
 
 
 
-  togleEddit() {
+  togleEddit(): void {
     this.editView = !this.editView;
+  }
+
+  editProfile(): void {
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.user = this.form.value as ProfileDetailsUser;
+    const { username, email, tel } = this.user;
+
+    this.userService.updateProfile(username, email, tel).subscribe(()=>{
+      this.togleEddit();
+    })
   }
 
   ngOnInit(): void {
