@@ -29,6 +29,7 @@
         <div class="footer">
             <!-- <i class="fas fa-thumbs-up"></i>
             <i class="fas fa-thumbs-down"></i> -->
+            <button *ngIf="!hasLiked(post)" (click)="likePost(post)">Like</button>
             <p><span>{{post.likes.length || 0}}</span> likes</p>
         </div>
     </div>

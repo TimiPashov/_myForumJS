@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import { Post } from 'src/app/types/post';
 import { Theme } from 'src/app/types/theme';
 import { ProfileDetailsUser } from 'src/app/types/user';
 import { UserService } from 'src/app/user/user.service';
@@ -16,6 +17,7 @@ export class CurrentThemeComponent implements OnInit {
 
 
   theme = {} as Theme;
+
 
   user: ProfileDetailsUser = {
     username: '',
@@ -33,10 +35,29 @@ export class CurrentThemeComponent implements OnInit {
     }
 
     return this.api.createPost(this.form.value.postText!, this.theme._id).subscribe((theme) => {
-      this.api.getTheme(theme._id).subscribe(theme => this.theme = theme) ;
+      this.api.getTheme(theme._id).subscribe(theme => this.theme = theme);
       this.form.reset();
     })
-    
+
+  }
+
+  likePost(post: Post) {
+    if (this.hasLiked(post)) {
+      return;
+    }
+    this.api.likePost(post._id).subscribe(() => {
+      this.route.paramMap.subscribe(params => {
+        this.api.getTheme(params.get('themeId')).subscribe(theme => {
+          this.theme = theme;
+        })
+      })
+    })
+  }
+
+  get hasLiked(): (post: Post) => boolean {
+    return (post: Post) =>{
+      return post.likes.some(like => like === this.userService.user?._id);
+    }
   }
 
   ngOnInit(): void {
@@ -46,7 +67,7 @@ export class CurrentThemeComponent implements OnInit {
       email,
       tel
     }
-    
+
     this.route.paramMap.subscribe(params => {
       this.api.getTheme(params.get('themeId')).subscribe(theme => {
         this.theme = theme;
