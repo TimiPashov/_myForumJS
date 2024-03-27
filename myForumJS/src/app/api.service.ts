@@ -19,15 +19,19 @@ export class ApiService {
   }
 
   getTheme(themeId: string | null) {
-    return this.http.get<Theme>(`/api/themes/${themeId}`)
+    return this.http.get<Theme>(`/api/themes/${themeId}`);
   }
 
   createTheme(themeName: string, postText: string) {
-    return this.http.post<Theme>(`/api/themes`, { themeName, postText })
+    return this.http.post<Theme>(`/api/themes`, { themeName, postText });
   }
 
   subscribeTheme(themeId: string) {
-    return this.http.put(`/api/themes/${themeId}`, {})
+    return this.http.put(`/api/themes/${themeId}`, {});
+  }
+
+  unSubscribeTheme(themeId: string) {
+    return this.http.put(`/api/themes/delete/${themeId}`, {});
   }
 
   getPosts(limit?: number) {

@@ -45,6 +45,14 @@ export class ThemesComponent implements OnInit, OnDestroy {
     })
   }
 
+  themeUnSubscribe(themeId: string) {
+    return this.api.unSubscribeTheme(themeId).subscribe(() => {
+      this.api.getThemes().subscribe(themes => {
+        this.themes = themes;
+      })
+    })
+  }
+
   ngOnInit(): void {
     this.subscription = this.api.getThemes().subscribe(themes => {
       this.themes = themes;

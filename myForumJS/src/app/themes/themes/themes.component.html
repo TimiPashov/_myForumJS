@@ -19,7 +19,7 @@
                             <ng-container *ngIf="isLoggedIn">
                                 <button *ngIf="!isSubscribed(theme)" class="subscribe"
                                     (click)="themeSubscribe(theme._id)">Subscribe</button>
-                                <button class="unsubscribe">Unsubscribe</button>
+                                <button (click)="themeUnSubscribe(theme._id)" class="unsubscribe">Unsubscribe</button>
                             </ng-container>
                             <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
                         </div>
