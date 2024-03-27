@@ -19,7 +19,7 @@ export interface AuthUser {
         tel: string,
         password: string,
         rePassword: string,
-        id: string
+        _id: string
 }
 
 export interface ProfileDetailsUser {

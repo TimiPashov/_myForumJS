@@ -16,7 +16,11 @@
                             <p>Date: <time>{{theme.created_at | dateTransform}}</time></p>
                         </div>
                         <div class="subscribers">
-                            <!-- <button class="subscribe">Subscribe</button> -->
+                            <ng-container *ngIf="isLoggedIn">
+                                <button *ngIf="!isSubscribed(theme)" class="subscribe"
+                                    (click)="themeSubscribe(theme._id)">Subscribe</button>
+                                <button class="unsubscribe">Unsubscribe</button>
+                            </ng-container>
                             <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
                         </div>
                     </div>

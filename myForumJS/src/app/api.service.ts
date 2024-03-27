@@ -26,6 +26,10 @@ export class ApiService {
     return this.http.post<Theme>(`/api/themes`, { themeName, postText })
   }
 
+  subscribeTheme(themeId: string) {
+    return this.http.put(`/api/themes/${themeId}`, {})
+  }
+
   getPosts(limit?: number) {
     let url = `/api/posts`;
     if (limit) {

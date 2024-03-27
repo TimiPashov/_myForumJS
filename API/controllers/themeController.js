@@ -35,6 +35,7 @@ function createTheme(req, res, next) {
 }
 
 function subscribe(req, res, next) {
+    console.log('User from server: ', req.user);
     const themeId = req.params.themeId;
     const { _id: userId } = req.user;
     themeModel.findByIdAndUpdate({ _id: themeId }, { $addToSet: { subscribers: userId } }, { new: true })
