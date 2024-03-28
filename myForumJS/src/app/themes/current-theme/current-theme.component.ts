@@ -19,6 +19,7 @@ export class CurrentThemeComponent implements OnInit {
   theme = {} as Theme;
   isEdit: boolean[] = [];
 
+
   user: ProfileDetailsUser = {
     username: '',
     email: '',
@@ -33,16 +34,14 @@ export class CurrentThemeComponent implements OnInit {
     postText: ['', [Validators.required]]
   })
 
-  addPost() {
-    if (!this.form.valid) {
-      return;
-    }
 
-    return this.api.createPost(this.form.value.postText!, this.theme._id).subscribe((theme) => {
-      this.api.getTheme(theme._id).subscribe(theme => this.theme = theme);
-      this.form.reset();
-    })
 
+  hasLiked(post: Post): boolean {
+    return post.likes.some(like => like === this.userService.user?._id);
+  }
+
+  isOwner(postUserId: string): boolean {
+    return this.userService.user?._id === postUserId;
   }
 
   likePost(post: Post) {
@@ -58,8 +57,16 @@ export class CurrentThemeComponent implements OnInit {
     })
   }
 
-  hasLiked(post: Post): boolean {
-    return post.likes.some(like => like === this.userService.user?._id);
+  addPost() {
+    if (!this.form.valid) {
+      return;
+    }
+
+    return this.api.createPost(this.form.value.postText!, this.theme._id).subscribe((theme) => {
+      this.api.getTheme(theme._id).subscribe(theme => this.theme = theme);
+      this.form.reset();
+    })
+
   }
 
   editPost(index: number) {
@@ -70,11 +77,11 @@ export class CurrentThemeComponent implements OnInit {
     const updatedText = this.editForm.value.postText;
 
     return this.api.editPost(this.theme._id, postId, updatedText!).subscribe(() => {
-      this.api.getTheme(this.theme._id).subscribe(theme =>{
-         this.theme = theme;
-         this.editForm.reset();
-         this.toggleEdit(index);
-        });
+      this.api.getTheme(this.theme._id).subscribe(theme => {
+        this.theme = theme;
+        this.editForm.reset();
+        this.toggleEdit(index);
+      });
 
     })
   }
@@ -104,6 +111,7 @@ export class CurrentThemeComponent implements OnInit {
       this.api.getTheme(params.get('themeId')).subscribe(theme => {
         this.theme = theme;
         this.isEdit = new Array(theme.posts.length).fill(false);
+
       })
     })
   }
