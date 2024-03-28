@@ -40,7 +40,10 @@ export class ThemesComponent implements OnInit, OnDestroy {
   themeSubscribe(themeId: string) {
     return this.api.subscribeTheme(themeId).subscribe(() => {
       this.api.getThemes().subscribe(themes => {
-        this.themes = themes;
+        this.themes = themes
+        .sort((a: { created_at: string }, b: { created_at: string }) => {
+          return (new Date(b.created_at) as any) - (new Date(a.created_at) as any);
+        });
       })
     })
   }
@@ -48,7 +51,10 @@ export class ThemesComponent implements OnInit, OnDestroy {
   themeUnSubscribe(themeId: string) {
     return this.api.unSubscribeTheme(themeId).subscribe(() => {
       this.api.getThemes().subscribe(themes => {
-        this.themes = themes;
+        this.themes = themes
+        .sort((a: { created_at: string }, b: { created_at: string }) => {
+          return (new Date(b.created_at) as any) - (new Date(a.created_at) as any);
+        });
       })
     })
   }
@@ -56,9 +62,10 @@ export class ThemesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.api.getThemes().subscribe(themes => {
       this.themes = themes
-      .sort((a: { updatedAt: string }, b: { updatedAt: string }) => {
-        return (new Date(b.updatedAt) as any) - (new Date(a.updatedAt) as any);
+      .sort((a: { created_at: string }, b: { created_at: string }) => {
+        return (new Date(b.created_at) as any) - (new Date(a.created_at) as any);
       });
+
 
       this.isLoading = false;
     });
