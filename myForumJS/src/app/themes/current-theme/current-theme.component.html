@@ -37,7 +37,7 @@
             <button *ngIf="isEdit[i]" (click)="toggleEdit(i)">Cancel</button>
             <button *ngIf="!isEdit[i] && isOwner(post.userId._id)" (click)="toggleEdit(i)">Edit</button>
             <button *ngIf="isOwner(post.userId._id)" (click)="deletePost(post._id)">Delete</button>
-            <button *ngIf="!hasLiked(post)" (click)="likePost(post)">Like</button>
+            <button *ngIf="!hasLiked(post) && !isOwner(post.userId._id)" (click)="likePost(post)">Like</button>
             <p><span>{{post.likes.length || 0}}</span> likes</p>
         </div>
     </div>
