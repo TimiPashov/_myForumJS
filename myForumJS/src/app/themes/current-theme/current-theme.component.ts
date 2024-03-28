@@ -60,6 +60,14 @@ export class CurrentThemeComponent implements OnInit {
     }
   }
 
+  editPost(){
+
+  }
+
+  deletePost(){
+    
+  }
+
   ngOnInit(): void {
     const { username, email, tel } = this.userService.user!
     this.user = {

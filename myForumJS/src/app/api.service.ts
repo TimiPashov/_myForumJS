@@ -46,6 +46,14 @@ export class ApiService {
     return this.http.post<Theme>(`/api/themes/${postId}`, { postText });
   }
 
+  editPost(themeId: string, postId: string, postText: string) {
+    return this.http.put<Post>(`/api/themes/${themeId}/posts/${postId}`, { postText });
+  }
+
+  deletePost() {
+
+  }
+
   likePost(postId: string) {
     return this.http.put(`/api/likes/${postId}`, {});
   }
