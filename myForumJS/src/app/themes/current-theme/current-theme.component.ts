@@ -17,7 +17,7 @@ export class CurrentThemeComponent implements OnInit {
 
 
   theme = {} as Theme;
-
+  isEdit: boolean[] = [];
 
   user: ProfileDetailsUser = {
     username: '',
@@ -26,6 +26,10 @@ export class CurrentThemeComponent implements OnInit {
   }
 
   form = this.fb.group({
+    postText: ['', [Validators.required]]
+  })
+
+  editForm = this.fb.group({
     postText: ['', [Validators.required]]
   })
 
@@ -54,18 +58,38 @@ export class CurrentThemeComponent implements OnInit {
     })
   }
 
-  get hasLiked(): (post: Post) => boolean {
-    return (post: Post) =>{
-      return post.likes.some(like => like === this.userService.user?._id);
+  hasLiked(post: Post): boolean {
+    return post.likes.some(like => like === this.userService.user?._id);
+  }
+
+  editPost(index: number) {
+    if (!this.editForm.valid) {
+      return;
     }
+    const postId = this.theme.posts[index]._id;
+    const updatedText = this.editForm.value.postText;
+
+    return this.api.editPost(this.theme._id, postId, updatedText!).subscribe(() => {
+      this.api.getTheme(this.theme._id).subscribe(theme =>{
+         this.theme = theme;
+         this.editForm.reset();
+         this.toggleEdit(index);
+        });
+
+    })
   }
 
-  editPost(){
+  deletePost() {
 
   }
 
-  deletePost(){
-    
+  toggleEdit(index: number): void {
+    this.isEdit[index] = !this.isEdit[index];
+
+    if (this.isEdit[index]) {
+      const post = this.theme.posts[index];
+      this.editForm.setValue({ postText: post.text });
+    }
   }
 
   ngOnInit(): void {
@@ -79,6 +103,7 @@ export class CurrentThemeComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.api.getTheme(params.get('themeId')).subscribe(theme => {
         this.theme = theme;
+        this.isEdit = new Array(theme.posts.length).fill(false);
       })
     })
   }

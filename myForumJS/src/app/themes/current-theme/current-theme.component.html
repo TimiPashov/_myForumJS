@@ -14,7 +14,7 @@
         </div>
     </div>
     <!-- comment  -->
-    <div *ngFor="let post of this.theme.posts" class="comment">
+    <div *ngFor="let post of this.theme.posts; let i = index" class="comment">
         <header class="header">
             <p><span>{{post.userId.username}}</span> posted on <time>{{post.created_at}}</time></p>
         </header>
@@ -22,6 +22,11 @@
             <div class="userdetails">
                 <img src="" alt="avatar">
             </div>
+            <form *ngIf="isEdit[i]" [formGroup]="editForm" (ngSubmit)="editPost(i)">
+                <label for="postText">Post Text</label>
+                <textarea name="postText" id="comment" cols="30" rows="5" formControlName="postText"></textarea>
+                <button>Submit</button>
+            </form>
             <div class="post-content">
                 <p>{{post.text}}</p>
             </div>
@@ -29,7 +34,8 @@
         <div class="footer">
             <!-- <i class="fas fa-thumbs-up"></i>
             <i class="fas fa-thumbs-down"></i> -->
-            <button>Edit</button>
+            <button *ngIf="isEdit[i]" (click)="toggleEdit(i)">Cancel</button>
+            <button *ngIf="!isEdit[i]" (click)="toggleEdit(i)">Edit</button>
             <button>Delete</button>
             <button *ngIf="!hasLiked(post)" (click)="likePost(post)">Like</button>
             <p><span>{{post.likes.length || 0}}</span> likes</p>
