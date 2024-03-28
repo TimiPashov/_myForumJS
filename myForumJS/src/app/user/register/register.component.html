@@ -42,7 +42,7 @@
                 <!-- password -->
                 <p class="field field-icon">
                     <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                    <input type="password" name="password" id="password" placeholder="******"
+                    <input type="password" name="password" id="password" placeholder="Password"
                         formControlName="password">
                 </p>
                 <ng-container *ngIf="form.get('passGroup')?.touched">
@@ -57,11 +57,11 @@
                 <!-- rePassword -->
                 <p class="field field-icon">
                     <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
-                    <input type="password" name="rePassword" id="rePassword" placeholder="******"
+                    <input type="password" name="rePassword" id="rePassword" placeholder="Repeat password"
                         formControlName="rePassword">
                 </p>
                 <ng-container *ngIf="form.get('passGroup')?.get('rePassword')?.touched">
-                    <p class="error">
+                    <p *ngIf="!matchPasswords()" class="error">
                         Repeat Password does not match password!
                     </p>
                 </ng-container>
