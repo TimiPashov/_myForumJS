@@ -22,9 +22,6 @@ export class RegisterComponent {
     })
   });
 
-
-
-
   register(): void {
     if (this.form.invalid) {
       return;
@@ -46,7 +43,7 @@ export class RegisterComponent {
   }
 
   matchPasswords(): boolean {  
-    
+
     return this.form.get('passGroup')
     ?.get('password')
     ?.value === this.form.get('passGroup')
