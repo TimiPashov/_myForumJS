@@ -5,7 +5,7 @@
         </div>
         <form [formGroup]="form" (ngSubmit)="addTheme()">
             <div class="new-theme-title">
-                <label for="themeName">Title <span class="red">*</span></label>
+                <label for="themeName">Title:</label>
                 <input type="text" name="themeName" id="themeName" formControlName="themeName">
                 <p class="error">
                     Theme name is required.
@@ -14,8 +14,8 @@
                     Theme name must be at least 5 characters long.
                 </p>
             </div>
-            <div class="new-theme-content">
-                <label for="postText">Post <span class="red">*</span></label>
+            <div class="new-theme-title">
+                <label for="postText">Post:</label>
                 <textarea type="text" name="postText" id="postText" rows="8" class="height"
                     formControlName="postText"></textarea>
                 <p class="error">
