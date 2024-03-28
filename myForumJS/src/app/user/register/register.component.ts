@@ -22,9 +22,7 @@ export class RegisterComponent {
     })
   });
 
-  // get passGroup() {
-  //   return this.form.get('passGroup');
-  // }
+
 
 
   register(): void {

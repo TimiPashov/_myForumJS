@@ -6,6 +6,10 @@
     font-size: 1.5em;
 }
 
+.register {
+    margin-top: 2em;
+}
+
 input {
     padding: 1em;
     border-radius: 0.4em;
@@ -28,4 +32,9 @@ form>div {
     /* width: 50%; */
     border-radius: 0.4em;
     font: 0.7em "Fira Code";
+}
+
+.error {
+    color: red;
+    font-size: 0.7em;
 }
