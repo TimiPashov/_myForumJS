@@ -20,10 +20,13 @@ export class PostsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.subscription = this.api.getPosts(5).subscribe({
+      
       next: (posts) => {
-        this.posts = posts.sort((a: { updatedAt: string }, b: { updatedAt: string }) => {
+        this.posts = posts
+        .sort((a: { updatedAt: string }, b: { updatedAt: string }) => {
           return (new Date(b.updatedAt) as any) - (new Date(a.updatedAt) as any);
         });
+
         this.isloading = false;
       },
       error: (err) => {

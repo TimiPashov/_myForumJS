@@ -13,7 +13,8 @@
                             <div class="nick-name">
                                 <p>Username: <span>{{theme.userId.username}}</span></p>
                             </div>
-                            <p>Date: <time>{{theme.created_at | dateTransform}}</time></p>
+                            <p>Date: <time>{{theme.created_at | dateTransform }}</time></p>
+                            <p>Updated At: <time>{{theme.updatedAt | dateTransform }}</time></p>
                         </div>
                         <div class="subscribers">
                             <ng-container *ngIf="isLoggedIn">

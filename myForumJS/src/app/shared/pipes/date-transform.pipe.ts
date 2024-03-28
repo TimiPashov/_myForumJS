@@ -6,7 +6,7 @@ import * as moment from 'moment';
 export class DateTransformPipe implements PipeTransform {
 
   transform(date: string, ...args: unknown[]): unknown {
-    return moment().format('MMMM Do YYYY, h:mm:ss a');
+    return moment(date).format('MMMM Do YYYY, h:mm:ss a');
   }
 
 }
