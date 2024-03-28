@@ -23,7 +23,7 @@ label {
 .new-theme-border>form {
     display: flex;
     flex-direction: column;
-    gap: 1em    ;
+    gap: 1em;
 }
 
 .new-theme-title {
@@ -31,14 +31,33 @@ label {
     flex-direction: column;
 }
 
-.new-theme-title>input, .new-theme-title>textarea {
+.new-theme-title>textarea {
+    max-width: 500px;
+    width: 500px;
+    max-height: 300px;
+}
+
+.new-theme-title>input,
+.new-theme-title>textarea {
     padding: 1em;
     border-radius: 0.4em;
     font: inherit;
     font-size: 0.7em;
     margin-bottom: 1em;
-    max-width: 600px;
-    max-height: 300px;
+
+}
+
+
+.new-theme-buttons{
+    display: flex;
+}
+
+.btn {
+    margin: 0 auto;
+    padding: 1em 2em;
+    /* width: 50%; */
+    border-radius: 0.4em;
+    font: 0.7em "Fira Code";
 }
 
 .error {

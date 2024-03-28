@@ -13,8 +13,8 @@ export class AddThemeComponent {
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router) { }
 
   form = this.fb.group({
-    themeName: ['', [Validators.required]],
-    postText: ['', [Validators.required]]
+    themeName: ['', [Validators.required, Validators.minLength(5)]],
+    postText: ['', [Validators.required, Validators.minLength(10)]]
   })
 
 
@@ -26,7 +26,7 @@ export class AddThemeComponent {
 
     const { themeName, postText } = this.form.value;
 
-    this.api.createTheme(themeName!, postText!).subscribe(()=>{
+    this.api.createTheme(themeName!, postText!).subscribe(() => {
       this.router.navigate(['/themes']);
     })
 
