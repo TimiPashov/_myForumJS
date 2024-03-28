@@ -50,8 +50,8 @@ export class ApiService {
     return this.http.put<Post>(`/api/themes/${themeId}/posts/${postId}`, { postText });
   }
 
-  deletePost() {
-
+  deletePost(themeId: string, postId: string) {
+    return this.http.delete(`/api/themes/${themeId}/posts/${postId}`);
   }
 
   likePost(postId: string) {
