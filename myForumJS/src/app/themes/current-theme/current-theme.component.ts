@@ -86,8 +86,10 @@ export class CurrentThemeComponent implements OnInit {
     })
   }
 
-  deletePost() {
-
+  deletePost(postId: string) {
+    this.api.deletePost(this.theme._id, postId).subscribe(() => {
+      this.api.getTheme(this.theme._id).subscribe(theme => this.theme = theme);
+    })
   }
 
   toggleEdit(index: number): void {
