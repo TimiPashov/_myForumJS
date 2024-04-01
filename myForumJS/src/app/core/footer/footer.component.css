@@ -7,8 +7,8 @@
     left: 50%;
     margin-top: 3em;
     transform: translateX(-50%);
-    width: calc(100%); /* Account for padding */
-    max-width: 1930px; /* Set max-width to match body */
+    width: calc(100%);
+    max-width: 1930px; 
     background-color: #FAD832;
 }
 

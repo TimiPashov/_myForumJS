@@ -1,4 +1,4 @@
-.container {
+/* .container {
     height: 75vh;
     display: flex;
     justify-content: center;
@@ -17,7 +17,7 @@ input {
 }
 
 form>div {
-    /* border: 1px solid black; */
+
     border-radius: 0.4em;
     padding: 1em;
     display: flex;
@@ -29,7 +29,7 @@ form>div {
 .register-btn {
     margin: 0 auto;
     padding: 1em 2em;
-    /* width: 50%; */
+
     border-radius: 0.4em;
     font: 0.7em "Fira Code";
 }
@@ -37,4 +37,4 @@ form>div {
 .error {
     color: red;
     font-size: 0.7em;
-}
+} */
