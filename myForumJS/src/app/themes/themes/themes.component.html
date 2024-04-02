@@ -30,7 +30,7 @@
                                 <button *ngIf="!isSubscribed(theme)"
                                     class="text-sm py-2 border border-black border-opacity-50 rounded-md bg-green-100"
                                     (click)="themeSubscribe(theme._id)">Subscribe</button>
-                                <button *ngIf="isSubscribed(theme)" (click)="themeUnSubscribe(theme._id)" class="text-sm py-2 border border-black border-opacity-50 rounded-md 
+                                <button *ngIf="isSubscribed(theme)" (click)="themeUnSubscribe(theme._id)" class="text-sm py-2 px-2 border border-black border-opacity-50 rounded-md 
                                     transition-transform transform-gpu hover:scale-105">Unsubscribe</button>
                             </ng-container>
                             <p class="py-1 px-1 m-0 text-sm italic">Comments: <span
