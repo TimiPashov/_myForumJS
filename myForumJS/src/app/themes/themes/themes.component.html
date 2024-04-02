@@ -17,7 +17,7 @@
                                 <p class="py-1 px-1 m-0 font-bold">Created by: <span
                                         class="font-normal">{{theme.userId.username}}</span></p>
                             </div>
-                            <div class="text-sm opacity-50">
+                            <div class="text-sm opacity-50 italic">
                                 <p class="py-1 px-1 m-0 font-bold">Created: <time class="font-normal">{{theme.created_at
                                         | dateTransform }}</time></p>
                                 <p class="py-1 px-1 m-0 font-bold">Updated: <time class="font-normal">{{theme.updatedAt
@@ -33,7 +33,7 @@
                                 <button *ngIf="isSubscribed(theme)" (click)="themeUnSubscribe(theme._id)" class="text-sm py-2 border border-black border-opacity-50 rounded-md 
                                     transition-transform transform-gpu hover:scale-105">Unsubscribe</button>
                             </ng-container>
-                            <p class="py-1 px-1 m-0 text-sm">Comments: <span
+                            <p class="py-1 px-1 m-0 text-sm italic">Comments: <span
                                     class="font-bold">{{theme.posts.length}}</span></p>
                         </div>
                     </div>

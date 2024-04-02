@@ -1,10 +1,4 @@
-
-
-/* .aside * {
-    margin: 0;
-    padding: 0;
-} */
-
+/* 
 aside {
     display: flex;
     flex-shrink: 1;
@@ -46,4 +40,4 @@ aside {
 .aside-theme a {
     text-decoration: none;
     color: inherit;
-}
+} */
