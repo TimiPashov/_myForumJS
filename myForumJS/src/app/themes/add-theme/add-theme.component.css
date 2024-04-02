@@ -1,4 +1,4 @@
-.container {
+/* .container {
     height: 75vh;
     display: flex;
     justify-content: center;
@@ -55,7 +55,6 @@ label {
 .btn {
     margin: 0 auto;
     padding: 1em 2em;
-    /* width: 50%; */
     border-radius: 0.4em;
     font: 0.7em "Fira Code";
 }
@@ -63,4 +62,4 @@ label {
 .error {
     color: red;
     font-size: 0.7em;
-}
+} */

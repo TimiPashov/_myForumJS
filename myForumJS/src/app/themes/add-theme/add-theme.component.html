@@ -1,37 +1,40 @@
-<div class="container">
-    <div class="new-theme-border">
+<div class="h-[78vh] flex justify-center items-center text-2xl leading-normal flex-wrap">
+    <div class="rounded-md p-10 shadow-custom">
         <div class="header-background">
             <span>New Theme</span>
         </div>
-        <form [formGroup]="form" (ngSubmit)="addTheme()">
-            <div class="new-theme-title">
+        <form class="flex flex-col" [formGroup]="form" (ngSubmit)="addTheme()">
+            <div class="flex flex-col my-4">
                 <label for="themeName">Title:</label>
-                <input type="text" name="themeName" id="themeName" formControlName="themeName">
+                <input class="p-4 border border-black rounded-md my-2" type="text" name="themeName" id="themeName"
+                    formControlName="themeName">
                 <ng-container *ngIf="form.get('themeName')?.touched">
-                    <p *ngIf="form.get('themeName')?.errors?.['required']" class="error">
+                    <p *ngIf="form.get('themeName')?.errors?.['required']" class="text-red-600 text-lg">
                         Theme name is required.
                     </p>
-                    <p *ngIf="form.get('themeName')?.errors?.['minlength']" class="error">
+                    <p *ngIf="form.get('themeName')?.errors?.['minlength']" class="text-red-600 text-lg">
                         Theme name must be at least 5 characters long.
                     </p>
                 </ng-container>
             </div>
-            <div class="new-theme-title">
+            <div class="flex flex-col my-4">
                 <label for="postText">Post:</label>
-                <textarea type="text" name="postText" id="postText" rows="8" class="height"
-                    formControlName="postText"></textarea>
+                <textarea class="p-4 border border-black rounded-md my-2 max-w-full max-h-80" type="text"
+                    name="postText" id="postText" formControlName="postText"></textarea>
                 <ng-container *ngIf="form.get('postText')?.touched">
-                    <p *ngIf="form.get('postText')?.errors?.['required']" class="error">
+                    <p *ngIf="form.get('postText')?.errors?.['required']" class="text-red-600 text-lg">
                         The field with your post is required.
                     </p>
-                    <p *ngIf="form.get('postText')?.errors?.['minlength']" class="error">
-                        Post must be at least 10 characters long.
+                    <p *ngIf="form.get('postText')?.errors?.['minlength']" class="text-red-600 text-lg">
+                        Post must be at least 10 symbols long.
                     </p>
                 </ng-container>
             </div>
-            <div class="new-theme-buttons">
-                <button class="btn">Cancel</button>
-                <button class="btn">Post</button>
+            <div class="m-center mt-8 flex gap-8">
+                <button class="text-sm mt-4 mb-6 py-2 px-8 border border-black border-opacity-50 rounded-md m-auto
+                transition-transform transform-gpu hover:scale-110 hover:shadow-hover">Cancel</button>
+                <button class="text-sm mt-4 mb-6 py-2 px-8 border border-black border-opacity-50 rounded-md m-auto
+                transition-transform transform-gpu hover:scale-110 hover:shadow-hover">Post</button>
             </div>
 
         </form>
