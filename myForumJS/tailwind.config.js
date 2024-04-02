@@ -11,6 +11,9 @@ module.exports = {
         'custom': '0 0 0.5em 0.1em rgba(0, 0, 0, 0.4)',
         'hover': '0 0 0.5em 0.1em rgba(0, 0, 0, 0.2)'
       },
+      margin: {
+        'center': '0 auto'
+      },
     },
   },
   plugins: [],

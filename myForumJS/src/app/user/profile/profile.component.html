@@ -1,53 +1,77 @@
-<div class="container">
+<div class="h-[78vh] flex justify-center items-center text-2xl leading-normal">
     <ng-container *ngIf="!editView">
-        <div class="profile"><img src="../../../assets/profile.png" alt="default user">
-            <h3>User Info:</h3>
-            <div class="flex">
-                <p>Username: </p>
+        <div class="p-8 rounded-md shadow-custom flex flex-col"><img class="max-h-40 self-center max-w-40 mb-4"
+                src="../../../assets/profile.png" alt="default user">
+            <h3 class="font-bold m-center mb-4">User Info</h3>
+            <div class="flex gap-4">
+                <p class="font-bold">Username: </p>
                 <p>{{profileUser.username}}</p>
             </div>
-            <div class="flex">
-                <p>Email: </p>
+            <div class="flex gap-4">
+                <p class="font-bold">Email: </p>
                 <p>{{profileUser.email}}</p>
             </div>
-            <div class="flex">
-                <p>Phone: </p>
+            <div class="flex gap-4">
+                <p class="font-bold">Phone: </p>
                 <p>{{profileUser.tel}}</p>
             </div>
-            <div class="btns">
+            <div class="m-center mt-8 flex gap-8">
 
-                <button class="back-btn" routerLink="/themes">Back</button>
-                <button class="edit-button" (click)="togleEddit()">Edit</button>
+                <button class="py-2 px-8 rounded-md text-sm border border-black border-opacity-50
+                 transition-transform transform-gpu hover:scale-110 hover:shadow-hover"
+                    routerLink="/themes">Back</button>
+                <button class="py-2 px-8 rounded-md text-sm border border-black border-opacity-50 
+                transition-transform transform-gpu hover:scale-110 hover:shadow-hover"
+                    (click)="togleEddit()">Edit</button>
             </div>
         </div>
     </ng-container>
     <ng-container *ngIf="editView">
-        <form [formGroup]="form" (ngSubmit)="editProfile()">
+        <form class="" [formGroup]="form" (ngSubmit)="editProfile()">
 
-            <div class="profile"><img src="../../../assets/profile.png" alt="default user">
-                <h3>User Info:</h3>
-                <div class="flex">
+            <div class="p-8 rounded-md shadow-custom flex flex-col">
+                <img class="max-h-40 self-center max-w-40 mb-4" src="../../../assets/profile.png" alt="default user">
+                <h3 class="m-center mb-4">Edit user</h3>
+                <div class="flex flex-col">
                     <p>Username: </p>
                     <label for="username"></label>
-                    <input type="text" name="username" id="username" placeholder="Johny" [value]="profileUser.username"  formControlName="username">
-                    <!-- <p class="edit-error">
-                        Username is required!
-                    </p> -->
+                    <input class="p-4 border border-black rounded-md my-2" type="text" name="username" id="username"
+                        placeholder="Johny" [value]="profileUser.username" formControlName="username">
+                    <ng-container *ngIf="form.get('username')?.touched">
+
+                        <p class="text-red-600 text-lg" *ngIf="form.get('username')?.errors?.['required']">
+                            Username is required!
+                        </p>
+                    </ng-container>
                 </div>
-                <div class="flex phone">
+                <div class="flex flex-col">
                     <p>Email: </p>
                     <label for="email"></label>
-                    <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" [value]="profileUser.email" formControlName="email">
+                    <input class="p-4 border border-black rounded-md my-2" type="email" name="email" id="email"
+                        placeholder="john.doe@gmail.com" [value]="profileUser.email" formControlName="email">
+                    <ng-container *ngIf="form.get('email')?.touched">
+
+                        <p  class="text-red-600 text-lg">
+                            Email is required!
+                        </p>
+                        <p class="text-red-600 text-lg">
+                            Email is not valid!
+                        </p>
+                    </ng-container>
                 </div>
-                <div class="flex phone">
+                <div class="flex flex-col">
                     <p>Phone: </p>
                     <label for="tel"></label>
-                    <input type="tel" name="tel" id="tel" placeholder="123-123-123" [value]="profileUser.tel" formControlName="tel">
+                    <input class="p-4 border border-black rounded-md my-2" type="tel" name="tel" id="tel"
+                        placeholder="123-123-123" [value]="profileUser.tel" formControlName="tel">
                 </div>
-                <div class="btns">
+                <div class="m-center mt-8 flex gap-8">
 
-                    <button class="back-btn" (click)="togleEddit()">Back</button>
-                    <button class="edit-button">Save</button>
+                    <button class="py-2 px-8 rounded-md text-sm border border-black border-opacity-50
+                    transition-transform transform-gpu hover:scale-110 hover:shadow-hover"
+                        (click)="togleEddit()">Back</button>
+                    <button class="py-2 px-8 rounded-md text-sm border border-black border-opacity-50
+                    transition-transform transform-gpu hover:scale-110 hover:shadow-hover">Save</button>
                 </div>
             </div>
         </form>
