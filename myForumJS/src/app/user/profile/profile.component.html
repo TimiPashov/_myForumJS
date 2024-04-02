@@ -31,9 +31,9 @@
 
             <div class="p-8 rounded-md shadow-custom flex flex-col">
                 <img class="max-h-40 self-center max-w-40 mb-4" src="../../../assets/profile.png" alt="default user">
-                <h3 class="m-center mb-4">Edit user</h3>
+                <h2 class="m-center mb-4 font-bold">Edit user</h2>
                 <div class="flex flex-col">
-                    <p>Username: </p>
+                    <p class="font-bold">Username: </p>
                     <label for="username"></label>
                     <input class="p-4 border border-black rounded-md my-2" type="text" name="username" id="username"
                         placeholder="Johny" [value]="profileUser.username" formControlName="username">
@@ -45,22 +45,22 @@
                     </ng-container>
                 </div>
                 <div class="flex flex-col">
-                    <p>Email: </p>
+                    <p class="font-bold">Email: </p>
                     <label for="email"></label>
                     <input class="p-4 border border-black rounded-md my-2" type="email" name="email" id="email"
                         placeholder="john.doe@gmail.com" [value]="profileUser.email" formControlName="email">
                     <ng-container *ngIf="form.get('email')?.touched">
 
-                        <p  class="text-red-600 text-lg">
+                        <p *ngIf="form.get('email')?.errors?.['required']" class="text-red-600 text-lg">
                             Email is required!
                         </p>
-                        <p class="text-red-600 text-lg">
+                        <p *ngIf="form.get('email')?.errors?.['email']" class="text-red-600 text-lg">
                             Email is not valid!
                         </p>
                     </ng-container>
                 </div>
                 <div class="flex flex-col">
-                    <p>Phone: </p>
+                    <p class="font-bold">Phone: </p>
                     <label for="tel"></label>
                     <input class="p-4 border border-black rounded-md my-2" type="tel" name="tel" id="tel"
                         placeholder="123-123-123" [value]="profileUser.tel" formControlName="tel">
