@@ -1,7 +1,9 @@
 <main>
     <app-loader *ngIf="isLoading" class="app-loader" />
     <div class="flex flex-col flex-grow flex-shrink flex-auto">
-
+        <h2 class="text-center font-bold text-3xl">
+            Themes
+        </h2>
         <div *ngFor="let theme of themes" class="theme-container">
             <div class="max-w-[95%] flex grow justify-around items-center py-1 px-2 border rounded-md text-xl mt-6
             transition-transform transform-gpu hover:scale-110 hover:shadow-hover shadow-inset bg-white">
@@ -12,23 +14,27 @@
                     <div class="flex justify-between mt-3">
                         <div>
                             <div class="text-xl">
-                                <p class="py-1 px-1 m-0 font-bold">Username: <span class="font-normal">{{theme.userId.username}}</span></p>
+                                <p class="py-1 px-1 m-0 font-bold">Created by: <span
+                                        class="font-normal">{{theme.userId.username}}</span></p>
                             </div>
-                            <div class="text-base">
-                                <p class="py-1 px-1 m-0 font-bold">Created: <time class="font-normal">{{theme.created_at | dateTransform }}</time></p>
-                                <p class="py-1 px-1 m-0 font-bold">Updated: <time class="font-normal">{{theme.updatedAt | dateTransform }}</time></p>
+                            <div class="text-sm opacity-50">
+                                <p class="py-1 px-1 m-0 font-bold">Created: <time class="font-normal">{{theme.created_at
+                                        | dateTransform }}</time></p>
+                                <p class="py-1 px-1 m-0 font-bold">Updated: <time class="font-normal">{{theme.updatedAt
+                                        | dateTransform }}</time></p>
                             </div>
-                        
+
                         </div>
                         <div class="flex flex-col justify-between">
                             <ng-container class="" *ngIf="isLoggedIn">
-                                <button *ngIf="!isSubscribed(theme)" class="text-sm py-2 border border-black border-opacity-50 rounded-md bg-green-100"
+                                <button *ngIf="!isSubscribed(theme)"
+                                    class="text-sm py-2 border border-black border-opacity-50 rounded-md bg-green-100"
                                     (click)="themeSubscribe(theme._id)">Subscribe</button>
-                                <button *ngIf="isSubscribed(theme)" (click)="themeUnSubscribe(theme._id)"
-                                    class="text-sm py-2 border border-black border-opacity-50 rounded-md 
+                                <button *ngIf="isSubscribed(theme)" (click)="themeUnSubscribe(theme._id)" class="text-sm py-2 border border-black border-opacity-50 rounded-md 
                                     transition-transform transform-gpu hover:scale-105">Unsubscribe</button>
                             </ng-container>
-                            <p class="py-1 px-1 m-0 text-sm">Subscribers: <span class="font-bold">{{theme.subscribers.length}}</span></p>
+                            <p class="py-1 px-1 m-0 text-sm">Comments: <span
+                                    class="font-bold">{{theme.posts.length}}</span></p>
                         </div>
                     </div>
                 </div>
