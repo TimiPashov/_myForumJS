@@ -1,5 +1,12 @@
 <main>
     <app-loader *ngIf="isLoading" class="app-loader" />
+    <select class="border rounded-md p-1" id="dropdown-menu" #myMenu (change)="selected(myMenu.value)">
+        <option value="" selected disabled>Sort by criteria</option>
+        <option value="Date">Date</option>
+        <option value="Activity">Activity</option>
+        <option value="Subscribers">Subscribers</option>
+        <option value="Name">Name</option>
+    </select>
     <div class="flex flex-col flex-grow flex-shrink flex-auto">
         <h2 class="text-center font-bold text-3xl">
             Themes
@@ -27,15 +34,17 @@
                         </div>
                         <div class="flex flex-col justify-between">
                             <ng-container class="" *ngIf="isLoggedIn">
-                                <button *ngIf="!isSubscribed(theme)"
-                                    class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-green-100
+                                <button *ngIf="!isSubscribed(theme)" class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-green-100
                                     transition-transform transform-gpu hover:scale-105 hover:shadow-md"
                                     (click)="themeSubscribe(theme._id)">Subscribe</button>
-                                <button *ngIf="isSubscribed(theme)" (click)="themeUnSubscribe(theme._id)" class="text-sm py-2 px-2 border border-black border-opacity-10 rounded-md 
+                                <button *ngIf="isSubscribed(theme)" (click)="themeUnSubscribe(theme._id)"
+                                    class="text-sm py-2 px-2 border border-black border-opacity-10 rounded-md 
                                     transition-transform transform-gpu hover:scale-105 hover:shadow-md">Unsubscribe</button>
                             </ng-container>
-                            <p class="py-1 px-1 m-0 text-sm italic">Comments: <span
+                            <p class="py-1 px-1 m-0 text-sm italic text-right">Comments: <span
                                     class="font-bold">{{theme.posts.length}}</span></p>
+                            <p class="py-1 px-1 m-0 text-sm italic text-right">Subs: <span
+                                    class="font-bold">{{theme.subscribers.length}}</span></p>
                         </div>
                     </div>
                 </div>

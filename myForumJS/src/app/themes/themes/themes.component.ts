@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/api.service';
 import { Theme } from 'src/app/types/theme';
 import { UserService } from 'src/app/user/user.service';
+import { mySort } from 'src/app/utils/themeSorter';
 
 @Component({
   selector: 'app-themes',
@@ -35,15 +36,21 @@ export class ThemesComponent implements OnInit, OnDestroy {
     return this.userService.isLoggedIn
   }
 
+  selected(selected: string) {
+    localStorage.setItem('selected', selected);
+    this.isLoading = true;
+    this.subscription = this.api.getThemes().subscribe(themes => {
+      this.themes = mySort(themes, selected);
+      this.isLoading = false;
+    });
+  }
 
 
   themeSubscribe(themeId: string) {
     return this.api.subscribeTheme(themeId).subscribe(() => {
       this.api.getThemes().subscribe(themes => {
-        this.themes = themes
-        .sort((a: { created_at: string }, b: { created_at: string }) => {
-          return (new Date(b.created_at) as any) - (new Date(a.created_at) as any);
-        });
+        this.themes = mySort(themes, localStorage.getItem('selected') || 'Date')
+
       })
     })
   }
@@ -51,22 +58,14 @@ export class ThemesComponent implements OnInit, OnDestroy {
   themeUnSubscribe(themeId: string) {
     return this.api.unSubscribeTheme(themeId).subscribe(() => {
       this.api.getThemes().subscribe(themes => {
-        this.themes = themes
-        .sort((a: { created_at: string }, b: { created_at: string }) => {
-          return (new Date(b.created_at) as any) - (new Date(a.created_at) as any);
-        });
+        this.themes = mySort(themes, localStorage.getItem('selected') || 'Date')
       })
     })
   }
 
   ngOnInit(): void {
-    this.subscription = this.api.getThemes().subscribe(themes => {    
-      this.themes = themes
-      .sort((a: { created_at: string }, b: { created_at: string }) => {
-        return (new Date(b.created_at) as any) - (new Date(a.created_at) as any);
-      });
-
-
+    this.subscription = this.api.getThemes().subscribe(themes => {
+      this.themes = mySort(themes, 'Date');
       this.isLoading = false;
     });
   }
