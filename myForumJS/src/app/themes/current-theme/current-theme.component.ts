@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Post } from 'src/app/types/post';
 import { Theme } from 'src/app/types/theme';
-import { ProfileDetailsUser } from 'src/app/types/user';
+import { ProfileDetailsUser, User } from 'src/app/types/user';
 import { UserService } from 'src/app/user/user.service';
 
 @Component({
@@ -13,10 +13,11 @@ import { UserService } from 'src/app/user/user.service';
   styleUrls: ['./current-theme.component.css']
 })
 export class CurrentThemeComponent implements OnInit {
-  constructor(private api: ApiService, private route: ActivatedRoute, private fb: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private api: ApiService, private route: ActivatedRoute, private fb: FormBuilder, private userService: UserService) { }
 
 
   theme = {} as Theme;
+  owner = {} as User;
   isEdit: boolean[] = [];
 
 
@@ -102,6 +103,7 @@ export class CurrentThemeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+     
     const { username, email, tel } = this.userService.user!
     this.user = {
       username,
@@ -110,11 +112,12 @@ export class CurrentThemeComponent implements OnInit {
     }
 
     this.route.paramMap.subscribe(params => {
-      this.api.getTheme(params.get('themeId')).subscribe(theme => {
-        this.theme = theme;
+      this.api.getTheme(params.get('themeId')).subscribe(theme => {   
+        this.theme = theme;  
         this.isEdit = new Array(theme.posts.length).fill(false);
 
       })
     })
+    
   }
 }

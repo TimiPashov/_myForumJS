@@ -1,4 +1,4 @@
-
+/* 
 body {
     max-width: 1366px;
     margin: auto;
@@ -37,7 +37,7 @@ button:hover {
     cursor: pointer;
 }
 
-/* theme list item */
+
 
 .theme-container a {
     text-decoration: none;
@@ -104,7 +104,7 @@ time {
     font-weight: bold;
 }
 
-/* theme content  */
+
 
 .theme-content {
     display: flex;
@@ -112,9 +112,9 @@ time {
     width: 80%;
 }
 
-/* theme title  */
 
-/* theme title  */
+
+
 
 .theme-name-wrapper {
     display: flex;
@@ -179,7 +179,7 @@ time {
     padding-top: 0;
 }
 
-/* comment  */
+
 
 .comment {
     margin-top: 1em;
@@ -259,11 +259,10 @@ time {
     color: red;
 }
 
-/* answer-comment */
+
 
 .answer-comment {
     width: 100%;
-    /* display: flex; */
     margin-top: 1em;
 }
 
@@ -342,4 +341,4 @@ body {
     table tbody tr:nth-child(even) td {
         background: #CCC;
     }
-    
+     */

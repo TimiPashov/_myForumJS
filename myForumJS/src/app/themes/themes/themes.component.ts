@@ -60,7 +60,7 @@ export class ThemesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.api.getThemes().subscribe(themes => {
+    this.subscription = this.api.getThemes().subscribe(themes => {    
       this.themes = themes
       .sort((a: { created_at: string }, b: { created_at: string }) => {
         return (new Date(b.created_at) as any) - (new Date(a.created_at) as any);

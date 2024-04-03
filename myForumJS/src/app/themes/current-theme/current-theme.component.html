@@ -1,51 +1,64 @@
-<div class="theme-content">
+<div class="flex flex-col justify-center items-center text-2xl flex-wrap">
     <!-- theme-title  -->
-    <div class="theme-title">
-        <div class="theme-name-wrapper">
-            <div class="theme-name">
-                <h2>{{theme.themeName}}</h2>
-                <p>Date: <time>{{theme.created_at}}</time></p>
-            </div>
-            <div class="subscribers">
-                <p>Subscribers: <span>{{theme.subscribers? theme.subscribers.length : 0}}</span></p>
-                <!-- <button class="subscribe">Subscribe</button>
-                <button class="unsubscribe">Unsubscribe</button> -->
+    <div class="w-full p-6 mt-4 mb-2">
+        <div class="flex flex-col">
+            <div class="flex flex-col border-b p-6">
+                <h2 class="self-center font-bold mb-6 text-3xl">{{theme.themeName}}</h2>
+                <div class="flex flex-row justify-between mt-8">
+                    <div class="text-base italic opacity-70">
+
+                        <p class="font-bold">Date: <time class="font-normal">{{theme.created_at}}</time></p>
+                        <p class="font-bold">Created by: <span
+                                class="font-normal">{{this.theme.posts[0].userId.username}}</span></p>
+
+                    </div>
+                    <p class="self-end block mr-10 text-xl"><span class="font-bold italic">Subscribers: </span><span class="text-3xl">{{theme.subscribers?
+                            theme.subscribers.length : 0}}</span>
+                    </p>
+                    <!-- <button class="subscribe">Subscribe</button>
+                        <button class="unsubscribe">Unsubscribe</button> -->
+
+                </div>
             </div>
         </div>
     </div>
+    <br>
     <!-- comment  -->
-    <div *ngFor="let post of this.theme.posts; let i = index" class="comment">
-        <header class="header">
-            <p><span>{{post.userId.username}}</span> posted on <time>{{post.updatedAt | dateTransform}}</time></p>
-        </header>
-        <div class="comment-main">
-            <div class="userdetails">
-                <img src="" alt="avatar">
+    <div *ngFor="let post of this.theme.posts; let i = index" class="max-w-[90%] w-full">
+        <div class="flex flex-col mt-6 p-6 flex-grow flex-shrink flex-auto flex-wrap rounded-md shadow-inset bg-white">
+
+            <header class="text-center">
+                <p><span>{{post.userId.username}}</span> posted on <time>{{post.updatedAt | dateTransform}}</time></p>
+            </header>
+            <div class="flex gap-10">
+                <div class="userdetails">
+                    <img class="max-h-40 self-center max-w-40 mb-4" src="../../../assets/profile.png" alt="avatar">
+                </div>
+                <form *ngIf="isEdit[i]" [formGroup]="editForm" (ngSubmit)="editPost(i)">
+                    <label for="postText">Post Text</label>
+                    <textarea name="postText" id="comment" cols="30" rows="5" formControlName="postText"></textarea>
+                    <button>Submit</button>
+                </form>
+                <div class="self-center">
+                    <p>{{post.text}}</p>
+                </div>
             </div>
-            <form *ngIf="isEdit[i]" [formGroup]="editForm" (ngSubmit)="editPost(i)">
-                <label for="postText">Post Text</label>
-                <textarea name="postText" id="comment" cols="30" rows="5" formControlName="postText"></textarea>
-                <button>Submit</button>
-            </form>
-            <div class="post-content">
-                <p>{{post.text}}</p>
+            <div class="self-end">
+                <!-- <i class="fas fa-thumbs-up"></i>
+                    <i class="fas fa-thumbs-down"></i> -->
+                <button *ngIf="isEdit[i]" (click)="toggleEdit(i)">Cancel</button>
+                <button *ngIf="!isEdit[i] && isOwner(post.userId._id)" (click)="toggleEdit(i)">Edit</button>
+                <button *ngIf="isOwner(post.userId._id)" (click)="deletePost(post._id)">Delete</button>
+                <button *ngIf="!hasLiked(post) && !isOwner(post.userId._id)" (click)="likePost(post)">Like</button>
+                <p><span>{{post.likes.length || 0}}</span> likes</p>
             </div>
-        </div>
-        <div class="footer">
-            <!-- <i class="fas fa-thumbs-up"></i>
-            <i class="fas fa-thumbs-down"></i> -->
-            <button *ngIf="isEdit[i]" (click)="toggleEdit(i)">Cancel</button>
-            <button *ngIf="!isEdit[i] && isOwner(post.userId._id)" (click)="toggleEdit(i)">Edit</button>
-            <button *ngIf="isOwner(post.userId._id)" (click)="deletePost(post._id)">Delete</button>
-            <button *ngIf="!hasLiked(post) && !isOwner(post.userId._id)" (click)="likePost(post)">Like</button>
-            <p><span>{{post.likes.length || 0}}</span> likes</p>
         </div>
     </div>
-    <div class="answer-comment">
+    <div class="mt-6">
         <p><span>{{user.username}}</span> comment:</p>
         <div class="answer">
             <form [formGroup]="form" (ngSubmit)="addPost()">
-                <textarea name="postText" id="comment" cols="30" rows="10" formControlName="postText"></textarea>
+                <textarea name="postText" id="comment" cols="50" rows="5" formControlName="postText"></textarea>
                 <button>Post</button>
             </form>
         </div>
