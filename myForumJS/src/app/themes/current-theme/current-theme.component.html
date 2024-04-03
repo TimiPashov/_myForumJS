@@ -2,8 +2,8 @@
     <!-- theme-title  -->
     <div class="w-full p-6 mt-4 mb-2">
         <div class="flex flex-col">
-            <div class="flex flex-col border-b p-6">
-                <h2 class="self-center font-bold mb-6 text-3xl">{{theme.themeName}}</h2>
+            <div class="flex flex-col p-6 border-b shadow-bottom rounded-md">
+                <h2 class="self-center font-bold mb-6 text-4xl">{{theme.themeName}}</h2>
                 <div class="flex flex-row justify-between mt-8">
                     <div class="text-base italic opacity-70">
 
@@ -12,7 +12,8 @@
                                 class="font-normal">{{this.theme.posts[0].userId.username}}</span></p>
 
                     </div>
-                    <p class="self-end block mr-10 text-xl"><span class="font-bold italic">Subscribers: </span><span class="text-3xl">{{theme.subscribers?
+                    <p class="self-end block mr-10 text-xl"><span class="font-bold italic">Subscribers: </span><span
+                            class="text-3xl">{{theme.subscribers?
                             theme.subscribers.length : 0}}</span>
                     </p>
                     <!-- <button class="subscribe">Subscribe</button>
@@ -22,7 +23,6 @@
             </div>
         </div>
     </div>
-    <br>
     <!-- comment  -->
     <div *ngFor="let post of this.theme.posts; let i = index" class="max-w-[90%] w-full">
         <div class="flex flex-col mt-6 p-6 flex-grow flex-shrink flex-auto flex-wrap rounded-md shadow-inset bg-white">
@@ -43,13 +43,16 @@
                     <p>{{post.text}}</p>
                 </div>
             </div>
-            <div class="self-end">
+            <div class="self-end flex flex-col gap-2">
                 <!-- <i class="fas fa-thumbs-up"></i>
                     <i class="fas fa-thumbs-down"></i> -->
                 <button *ngIf="isEdit[i]" (click)="toggleEdit(i)">Cancel</button>
-                <button *ngIf="!isEdit[i] && isOwner(post.userId._id)" (click)="toggleEdit(i)">Edit</button>
-                <button *ngIf="isOwner(post.userId._id)" (click)="deletePost(post._id)">Delete</button>
-                <button *ngIf="!hasLiked(post) && !isOwner(post.userId._id)" (click)="likePost(post)">Like</button>
+                <button *ngIf="!isEdit[i] && isOwner(post.userId._id)" (click)="toggleEdit(i)" class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-green-100
+                transition-transform transform-gpu hover:scale-105 hover:shadow-md">Edit</button>
+                <button *ngIf="isOwner(post.userId._id)" (click)="deletePost(post._id)" class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-red-100
+                transition-transform transform-gpu hover:scale-105 hover:shadow-md">Delete</button>
+                <button *ngIf="!hasLiked(post) && !isOwner(post.userId._id)" (click)="likePost(post)" class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-blue-100
+                transition-transform transform-gpu hover:scale-105 hover:shadow-md">Like</button>
                 <p><span>{{post.likes.length || 0}}</span> likes</p>
             </div>
         </div>

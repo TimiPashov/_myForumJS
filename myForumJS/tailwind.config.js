@@ -10,7 +10,8 @@ module.exports = {
       boxShadow: {
         'custom': '0 0 0.5em 0.1em rgba(0, 0, 0, 0.4)',
         'hover': '0 0 0.5em 0.1em rgba(0, 0, 0, 0.2)',
-        'inset': '0 0 1em 0 rgba(0, 0, 0, 0.1) inset'
+        'inset': '0 0 1em 0 rgba(0, 0, 0, 0.1) inset',
+        'bottom': '0 0.1em 0.3em rgba(0, 0, 0, 0.2)'
       },
       margin: {
         'center': '0 auto'
