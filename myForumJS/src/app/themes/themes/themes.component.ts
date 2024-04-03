@@ -74,5 +74,6 @@ export class ThemesComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+    localStorage.removeItem('selected')
   }
 }
