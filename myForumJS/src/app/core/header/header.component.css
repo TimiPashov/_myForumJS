@@ -50,5 +50,5 @@
 
 .nav ul li a:hover {
     transform: scale(1.2);
-    color: #FBFEF9;
+    /* color: #FBFEF9; */
 }
