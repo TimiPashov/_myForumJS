@@ -1,19 +1,28 @@
-<header class="header">
-    <div class="home">
-        <a routerLink="/home">_myForum<span>JS</span></a>
+<header class="h-64 p-8 flex justify-between items-center border-b w-full bg-cover"
+    style="background-image: url('https://unsplash.com/photos/a-robot-hand-holding-a-letter-that-says-ai-OFxYMp8VkdI');">
+    <div class="ml-20">
+        <a class="text-5xl font-bold" routerLink="/home">_myForum<span class="text-8xl italic">JS</span></a>
     </div>
-    <nav class="nav">
-        <ul>
-            <li><a routerLink="/home">Home</a></li>
-            <li><a routerLink="/themes">Themes</a></li>
+    <nav class="mr-20 ">
+        <ul class="flex flex-wrap items-center gap-9">
+            <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125"
+                    routerLink="/home">Home</a></li>
+            <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125"
+                    routerLink="/themes">Themes</a></li>
             <ng-container *ngIf="isLoggedIn">
-                <li><a routerLink="/themes/add-theme">Add Theme</a></li>
-                <li><a routerLink="/auth/profile">{{firstName}}'s Profile</a></li>
-                <li (click)="logout()"><a href="javascript:void(0)">Logout</a></li>
+                <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125"
+                        routerLink="/themes/add-theme">Add Theme</a></li>
+                <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125"
+                        routerLink="/auth/profile">{{firstName}}'s Profile</a></li>
+                <li (click)="logout()"><a
+                        class="text-2xl inline-block transition-transform transform-gpu hover:scale-125"
+                        href="javascript:void(0)">Logout</a></li>
             </ng-container>
             <ng-container *ngIf="!isLoggedIn">
-                <li><a routerLink="/auth/login">Login</a></li>
-                <li><a routerLink="/auth/register">Register</a></li>
+                <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125"
+                        routerLink="/auth/login">Login</a></li>
+                <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125"
+                        routerLink="/auth/register">Register</a></li>
             </ng-container>
         </ul>
     </nav>
