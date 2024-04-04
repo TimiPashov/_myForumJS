@@ -13,9 +13,13 @@ import { mySort } from 'src/app/utils/themeSorter';
 export class ThemesComponent implements OnInit, OnDestroy {
   constructor(private api: ApiService, private userService: UserService) { }
 
+  allThemes: Theme[] = [];
   themes: Theme[] = [];
   private subscription = {} as Subscription;
   isLoading: boolean = true;
+  startNumber: number = 0;
+  endNumber: number = 5;
+
 
 
   isSubscribed(theme: Theme): boolean {
@@ -40,7 +44,7 @@ export class ThemesComponent implements OnInit, OnDestroy {
     localStorage.setItem('selected', selected);
     this.isLoading = true;
     this.subscription = this.api.getThemes().subscribe(themes => {
-      this.themes = mySort(themes, selected);
+      this.themes = mySort(themes, selected).slice(this.startNumber, this.endNumber);
       this.isLoading = false;
     });
   }
@@ -49,7 +53,8 @@ export class ThemesComponent implements OnInit, OnDestroy {
   themeSubscribe(themeId: string) {
     return this.api.subscribeTheme(themeId).subscribe(() => {
       this.api.getThemes().subscribe(themes => {
-        this.themes = mySort(themes, localStorage.getItem('selected') || 'Date')
+        this.allThemes = themes;
+        this.themes = mySort(this.allThemes, localStorage.getItem('selected') || 'Date').slice(this.startNumber, this.endNumber);
 
       })
     })
@@ -58,14 +63,43 @@ export class ThemesComponent implements OnInit, OnDestroy {
   themeUnSubscribe(themeId: string) {
     return this.api.unSubscribeTheme(themeId).subscribe(() => {
       this.api.getThemes().subscribe(themes => {
-        this.themes = mySort(themes, localStorage.getItem('selected') || 'Date')
+        this.allThemes = themes;
+        this.themes = mySort(this.allThemes, localStorage.getItem('selected') || 'Date').slice(this.startNumber, this.endNumber);
       })
     })
   }
 
+  nextPage() {
+    if (this.endNumber >= this.allThemes.length) {
+      return;
+    }
+
+    const nextPageStart = this.endNumber;
+    let nextPageEnd = this.endNumber + 5;
+
+
+    this.startNumber = nextPageStart;
+    this.endNumber = nextPageEnd;
+    this.themes = mySort(this.allThemes, localStorage.getItem('selected') || 'Date').slice(this.startNumber, this.endNumber);
+  }
+
+  prevPage() {
+    const prevPageStart = this.startNumber - 5;
+    const prevPageEnd = this.endNumber - 5;
+
+    if (prevPageStart < 0) {
+      return;
+    }
+
+    this.startNumber = prevPageStart;
+    this.endNumber = prevPageEnd;
+    this.themes = mySort(this.allThemes, localStorage.getItem('selected') || 'Date').slice(this.startNumber, this.endNumber);
+  }
+
   ngOnInit(): void {
     this.subscription = this.api.getThemes().subscribe(themes => {
-      this.themes = mySort(themes, 'Date');
+      this.allThemes = themes;
+      this.themes = mySort(this.allThemes, 'Date').slice(this.startNumber, this.endNumber);
       this.isLoading = false;
     });
   }
@@ -74,6 +108,6 @@ export class ThemesComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    localStorage.removeItem('selected')
+    localStorage.removeItem('selected');
   }
 }

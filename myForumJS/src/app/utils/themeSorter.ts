@@ -2,7 +2,7 @@ import { Theme } from "../types/theme";
 
 
 export function mySort(themes: Theme[], criteria: string) {
-
+    
     switch (criteria) {
         case 'Date':
             return themes.sort((a: { created_at: string }, b: { created_at: string }) => {

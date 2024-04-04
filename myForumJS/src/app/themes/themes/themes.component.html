@@ -16,7 +16,8 @@
             transition-transform transform-gpu hover:scale-110 hover:shadow-hover shadow-inset bg-white">
                 <div class="w-full">
                     <a routerLink={{theme._id}} class="normal">
-                        <h2 class="py-1 px-1 m-0 text-center font-bold text-2xl hover:text-yellow-300 hover:scale-105">{{theme.themeName}}</h2>
+                        <h2 class="py-1 px-1 m-0 text-center font-bold text-2xl hover:text-yellow-300 hover:scale-105">
+                            {{theme.themeName}}</h2>
                     </a>
                     <div class="flex justify-between mt-3">
                         <div>
@@ -50,6 +51,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="flex gap-6 items-center justify-center mt-4 text-2xl">
+            <button (click)="prevPage()">&lt;Prev</button>
+            <button (click)="nextPage()">Next&gt;</button>
+        </div>
     </div>
 </main>
