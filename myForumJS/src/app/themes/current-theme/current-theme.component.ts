@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Post } from 'src/app/types/post';
 import { Theme } from 'src/app/types/theme';
-import { ProfileDetailsUser, User } from 'src/app/types/user';
+import { ProfileDetailsUser } from 'src/app/types/user';
 import { UserService } from 'src/app/user/user.service';
 
 @Component({
@@ -17,7 +17,6 @@ export class CurrentThemeComponent implements OnInit {
 
 
   theme = {} as Theme;
-  owner = {} as User;
   isEdit: boolean[] = [];
 
 
@@ -28,11 +27,11 @@ export class CurrentThemeComponent implements OnInit {
   }
 
   form = this.fb.group({
-    postText: ['', [Validators.required]]
+    postText: ['', [Validators.required, Validators.minLength(10)]]
   })
 
   editForm = this.fb.group({
-    postText: ['', [Validators.required]]
+    postText: ['', [Validators.required, Validators.minLength(10)]]
   })
 
 
@@ -88,9 +87,12 @@ export class CurrentThemeComponent implements OnInit {
   }
 
   deletePost(postId: string) {
-    this.api.deletePost(this.theme._id, postId).subscribe(() => {
-      this.api.getTheme(this.theme._id).subscribe(theme => this.theme = theme);
-    })
+    if (window.confirm('Are you sure you want to delete this post?')) {
+
+      this.api.deletePost(this.theme._id, postId).subscribe(() => {
+        this.api.getTheme(this.theme._id).subscribe(theme => this.theme = theme);
+      })
+    }
   }
 
   toggleEdit(index: number): void {
@@ -103,7 +105,7 @@ export class CurrentThemeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-     
+
     const { username, email, tel } = this.userService.user!
     this.user = {
       username,
@@ -112,12 +114,12 @@ export class CurrentThemeComponent implements OnInit {
     }
 
     this.route.paramMap.subscribe(params => {
-      this.api.getTheme(params.get('themeId')).subscribe(theme => {   
-        this.theme = theme;  
+      this.api.getTheme(params.get('themeId')).subscribe(theme => {
+        this.theme = theme;
         this.isEdit = new Array(theme.posts.length).fill(false);
 
       })
     })
-    
+
   }
 }
