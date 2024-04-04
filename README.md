@@ -1,9 +1,18 @@
 
 
-# MyForumJS
-Angular&amp;TypeScript project defense for SoftUni
+# Description
+Angular&amp;TypeScript project defense for SoftUni;
+The application represents a forum, where you can log in with your own profile and
+create a theme or comment/subscribe/like other themes.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
+
+# Features
+On application start the guest/user will see the welcome message page.
+
+## Catalog 
+By clicking on the Themes link in the navigation you will be able to see the first five themes sorted by your choice from the dropdown.
+
 
 ## Development server
 
