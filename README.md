@@ -12,28 +12,35 @@ On application start the guest/user will see the welcome message page.
 
 ## Catalog 
 By clicking on the Themes link in the navigation you will be able to see the first five themes sorted by your choice from the dropdown.
+You have the options to select next or previous page for more Themes.
+
+## Login/Register
+You can either log in or register your profile through the links in the navigation.
+
+## Details
+If you are logged in, by clicking on one of the Themes or Posts in the "themes" page, you will be able to see detailed information and all the comments for the selected Theme.
+
+## CRUD
+While logged in you can create your own Theme, comment on Themes including your own, and edit/delete your own comments.
+You can also like comments that are not your own and subscribe to Themes.
+
+## Profile page
+This is your private profile page. Here you can edit basic information about your profile.
+
+# Installation
+After you download the repository:
+
+## REST API
+Open CMD in the API folder and run `npm install` to isntall all the server dependencies.
+Run `npm start` to start the server on port 3000.
+The default user is peter@abv.bg/123123.
+
+## APP Init
+Open CMD in the myForumJS folder and run `npm install` to isntall all the app dependencies.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/` to open the Application
 
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
