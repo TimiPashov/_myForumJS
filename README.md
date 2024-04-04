@@ -7,6 +7,18 @@ create a theme or comment/subscribe/like other themes.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
 
+# Installation
+After you download the repository:
+
+## REST API
+Open CMD in the API folder and run `npm install` to isntall all the server dependencies.
+Run `npm start` to start the server on port 3000.
+The default user is peter@abv.bg/123123.
+
+## APP Init
+Open CMD in the myForumJS folder and run `npm install` to isntall all the app dependencies.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/` to open the Application
+
 # Features
 On application start the guest/user will see the welcome message page.
 
@@ -31,17 +43,7 @@ This is your private profile page. Here you can edit basic information about you
 Read the description of the API fodler in the project.
 There you will find all the endpoints of the API.
 
-# Installation
-After you download the repository:
 
-## REST API
-Open CMD in the API folder and run `npm install` to isntall all the server dependencies.
-Run `npm start` to start the server on port 3000.
-The default user is peter@abv.bg/123123.
-
-## APP Init
-Open CMD in the myForumJS folder and run `npm install` to isntall all the app dependencies.
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/` to open the Application
 
 
 
