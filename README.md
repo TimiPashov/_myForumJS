@@ -27,6 +27,10 @@ You can also like comments that are not your own and subscribe to Themes.
 ## Profile page
 This is your private profile page. Here you can edit basic information about your profile.
 
+# API Info
+Read the description of the API fodler in the project.
+There you will find all the endpoints of the API.
+
 # Installation
 After you download the repository:
 
