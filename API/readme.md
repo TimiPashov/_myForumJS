@@ -335,6 +335,34 @@ Content:
 "__v": 0
 }
 ```
+## Unsubscribe to Theme
+Removes your subscribtion from the selected theme.
+
+### URL --> ```/themes/:themeId```
+
+### Method --> ```DELETE```
+
+
+### Success Response:
+
+Code: 200
+
+Content: 
+``` 
+{
+"subscribers": ["5f8580d25d1da62568dd38fd"],
+"posts": [
+    "5f85ad8f1141b13a04a9139c",
+    "5f85b2501141b13a04a9139d"
+],
+"_id": "5f858dd2d895ad23602db9d4",
+"themeName": "Some Theme",
+"userId": "5f8580d25d1da62568dd38fd",
+"created_at": "2020-10-13T11:21:54.863Z",
+"updatedAt": "2020-10-13T13:57:36.466Z",
+"__v": 0
+}
+```
 
 ### Error Response:
 
