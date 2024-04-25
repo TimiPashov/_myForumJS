@@ -45,17 +45,16 @@ export class UserService implements OnDestroy {
       password,
       rePassword,
       tel,
-    })
-      .pipe(tap((user) => {
-        this.user$$.next(user)
-        this.router.navigate(['/themes'])
-      }))
+    }).pipe(tap((user) => {
+      this.user$$.next(user)
+      this.router.navigate(['/themes'])
+    }))
   }
 
   logout() {
     return this.http
       .post('/api/logout', {})
-      .pipe(tap((user) => this.user$$.next(undefined)));
+      .pipe(tap(() => this.user$$.next(undefined)));
   }
 
   getProfile() {
@@ -67,8 +66,9 @@ export class UserService implements OnDestroy {
     return this.http.put<AuthUser>('/api/users/profile', { username, email, tel })
       .pipe(tap((user) => this.user$$.next(user)));
   }
-
+  
   ngOnDestroy(): void {
+    debugger
     this.userSub.unsubscribe();
   }
 }

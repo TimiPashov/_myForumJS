@@ -10,7 +10,7 @@ export class AuthenticatorComponent implements OnInit {
 
   constructor(private userService: UserService) { }
   authenticating = true;
-
+  
   ngOnInit(): void {
     this.userService.getProfile()
       .subscribe({
