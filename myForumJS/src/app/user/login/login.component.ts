@@ -2,15 +2,19 @@ import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor(private userService: UserService, private router: Router) { }
-
+  errorMessage: string = '';
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) {}
 
   login(form: NgForm) {
     if (!form) {
@@ -24,8 +28,14 @@ export class LoginComponent {
 
     const { email, password } = form.value;
 
-    this.userService.login(email, password).subscribe(() => {
-      this.router.navigate(['/themes'])
-    })
+    this.userService.login(email, password).subscribe(
+      () => {
+        this.router.navigate(['/themes']);
+      },
+      (error: HttpErrorResponse) => {
+        this.errorMessage = error.error.message;
+        
+      },
+    );
   }
 }
