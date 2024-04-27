@@ -18,11 +18,7 @@ module.exports = {
       margin: {
         center: "0 auto",
       },
-      backgroundImage: {
-        "header-background":
-          "url('https://unsplash.com/photos/a-robot-hand-holding-a-letter-that-says-ai-OFxYMp8VkdI')",
-        "footer-texture": "url('/img/footer-texture.png')",
-      },
+  
     },
   },
   plugins: [

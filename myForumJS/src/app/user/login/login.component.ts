@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -34,7 +34,6 @@ export class LoginComponent {
       },
       (error: HttpErrorResponse) => {
         this.errorMessage = error.error.message;
-        
       },
     );
   }

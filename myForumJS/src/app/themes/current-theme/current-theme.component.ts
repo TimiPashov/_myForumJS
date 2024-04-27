@@ -10,34 +10,37 @@ import { UserService } from 'src/app/user/user.service';
 @Component({
   selector: 'app-current-theme',
   templateUrl: './current-theme.component.html',
-  styleUrls: ['./current-theme.component.css']
+  styleUrls: ['./current-theme.component.css'],
 })
 export class CurrentThemeComponent implements OnInit {
-  constructor(private api: ApiService, private route: ActivatedRoute, private fb: FormBuilder, private userService: UserService) { }
+  constructor(
+    private api: ApiService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private userService: UserService,
+  ) {}
 
-
-  theme = {} as Theme;
+  theme = {} as any;
   isEdit: boolean[] = [];
-
+  isLoading: boolean = true;
+  themeOwnerDetails = {} as ProfileDetailsUser;
 
   user: ProfileDetailsUser = {
     username: '',
     email: '',
-    tel: ''
-  }
+    tel: '',
+  };
 
   form = this.fb.group({
-    postText: ['', [Validators.required, Validators.minLength(10)]]
-  })
+    postText: ['', [Validators.required, Validators.minLength(10)]],
+  });
 
   editForm = this.fb.group({
-    postText: ['', [Validators.required, Validators.minLength(10)]]
-  })
-
-
+    postText: ['', [Validators.required, Validators.minLength(10)]],
+  });
 
   hasLiked(post: Post): boolean {
-    return post.likes.some(like => like === this.userService.user?._id);
+    return post.likes.some((like) => like === this.userService.user?._id);
   }
 
   isOwner(postUserId: string): boolean {
@@ -49,12 +52,12 @@ export class CurrentThemeComponent implements OnInit {
       return;
     }
     this.api.likePost(post._id).subscribe(() => {
-      this.route.paramMap.subscribe(params => {
-        this.api.getTheme(params.get('themeId')).subscribe(theme => {
+      this.route.paramMap.subscribe((params) => {
+        this.api.getTheme(params.get('themeId')).subscribe((theme) => {
           this.theme = theme;
-        })
-      })
-    })
+        });
+      });
+    });
   }
 
   addPost() {
@@ -62,11 +65,12 @@ export class CurrentThemeComponent implements OnInit {
       return;
     }
 
-    return this.api.createPost(this.form.value.postText!, this.theme._id).subscribe((theme) => {
-      this.api.getTheme(theme._id).subscribe(theme => this.theme = theme);
-      this.form.reset();
-    })
-
+    return this.api
+      .createPost(this.form.value.postText!, this.theme._id)
+      .subscribe((theme) => {
+        this.api.getTheme(theme._id).subscribe((theme) => (this.theme = theme));
+        this.form.reset();
+      });
   }
 
   editPost(index: number) {
@@ -76,22 +80,24 @@ export class CurrentThemeComponent implements OnInit {
     const postId = this.theme.posts[index]._id;
     const updatedText = this.editForm.value.postText;
 
-    return this.api.editPost(this.theme._id, postId, updatedText!).subscribe(() => {
-      this.api.getTheme(this.theme._id).subscribe(theme => {
-        this.theme = theme;
-        this.editForm.reset();
-        this.toggleEdit(index);
+    return this.api
+      .editPost(this.theme._id, postId, updatedText!)
+      .subscribe(() => {
+        this.api.getTheme(this.theme._id).subscribe((theme) => {
+          this.theme = theme;
+          this.editForm.reset();
+          this.toggleEdit(index);
+        });
       });
-
-    })
   }
 
   deletePost(postId: string) {
     if (window.confirm('Are you sure you want to delete this post?')) {
-
       this.api.deletePost(this.theme._id, postId).subscribe(() => {
-        this.api.getTheme(this.theme._id).subscribe(theme => this.theme = theme);
-      })
+        this.api
+          .getTheme(this.theme._id)
+          .subscribe((theme) => (this.theme = theme));
+      });
     }
   }
 
@@ -105,21 +111,23 @@ export class CurrentThemeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    const { username, email, tel } = this.userService.user!
+    const { username, email, tel } = this.userService.user!;
     this.user = {
       username,
       email,
-      tel
-    }
+      tel,
+    };
 
-    this.route.paramMap.subscribe(params => {
-      this.api.getTheme(params.get('themeId')).subscribe(theme => {
+    this.route.paramMap.subscribe((params) => {
+      this.api.getTheme(params.get('themeId')).subscribe((theme) => {
         this.theme = theme;
+        const ownerId = this.theme.userId;
+        this.userService.getUser(ownerId).subscribe((user) => {
+          this.themeOwnerDetails = user;
+        });
+        this.isLoading = false;
         this.isEdit = new Array(theme.posts.length).fill(false);
-
-      })
-    })
-
+      });
+    });
   }
 }

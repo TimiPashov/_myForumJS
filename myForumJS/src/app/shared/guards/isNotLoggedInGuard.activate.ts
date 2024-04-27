@@ -6,11 +6,11 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 import { UserService } from 'src/app/user/user.service';
 
 @Injectable({ providedIn: 'root' })
-export class IsLoggedInGuard implements CanActivate {
+export class IsNotLoggedInGuard implements CanActivate {
   constructor(
     private userService: UserService,
     private router: Router,
@@ -28,11 +28,12 @@ export class IsLoggedInGuard implements CanActivate {
 
   checkUserAccess() {
     return this.userService.user$.pipe(
+      take(1),
       map((data) => {
         if (data) {
-          return true;
+          return false;
         }
-        return false;
+        return true;
       }),
     );
   }
