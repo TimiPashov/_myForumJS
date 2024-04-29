@@ -32,7 +32,7 @@ export class IsLoggedInGuard implements CanActivate {
         if (data) {
           return true;
         }
-        this.router.navigate(['/themes']);
+        this.router.navigate(['/auth/login']);
         return false;
       }),
     );
