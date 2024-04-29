@@ -1,5 +1,7 @@
+import { trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { listAnimation } from 'src/app/animations/postListAnimation';
 import { ApiService } from 'src/app/api.service';
 import { Theme } from 'src/app/types/theme';
 import { UserService } from 'src/app/user/user.service';
@@ -9,6 +11,9 @@ import { mySort } from 'src/app/utils/themeSorter';
   selector: 'app-themes',
   templateUrl: './themes.component.html',
   styleUrls: ['./themes.component.css'],
+  animations: [
+    trigger('animate', listAnimation()),
+  ],
 })
 export class ThemesComponent implements OnInit, OnDestroy {
   constructor(
@@ -35,7 +40,6 @@ export class ThemesComponent implements OnInit, OnDestroy {
   get userId(): string {
     return this.userService.user?._id || '';
   }
-
 
   selected(selected: string) {
     localStorage.setItem('selected', selected);
