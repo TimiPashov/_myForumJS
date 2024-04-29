@@ -4,6 +4,7 @@ import {
   stagger,
   style,
   transition,
+  trigger,
 } from '@angular/animations';
 
 export function listAnimation() {
@@ -27,7 +28,7 @@ export function listAnimation() {
 }
 
 export function elementAnimation() {
-  return  [
+  return [
     transition('void => *', [
       style({
         height: 0,
@@ -36,12 +37,24 @@ export function elementAnimation() {
         'margin-bottom': 0,
         padding: 0,
       }),
-      animate('150ms', style({
-        height: '*',
-        'margin-bottom': '*',
-        padding: '*'
-      })),
-      animate(70)
+      animate(
+        '150ms',
+        style({
+          height: '*',
+          'margin-bottom': '*',
+          padding: '*',
+        }),
+      ),
+      animate(70),
     ]),
-  ]
+  ];
+}
+
+export function logoAnimation() {
+  return trigger('fadeIn', [
+    transition(':enter', [
+      style({ opacity: 0 }),
+      animate('1s ease-in', style({ opacity: 1 })),
+    ]),
+  ]);
 }
