@@ -1,5 +1,7 @@
+import { trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { listAnimation } from 'src/app/animations/postListAnimation';
 import { ApiService } from 'src/app/api.service';
 import { Post } from 'src/app/types/post';
 
@@ -7,7 +9,10 @@ import { Post } from 'src/app/types/post';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css']
+  styleUrls: ['./posts.component.css'],
+  animations: [
+    trigger('animate', listAnimation())
+  ]
 })
 export class PostsComponent implements OnInit, OnDestroy {
 

@@ -1,9 +1,9 @@
-<aside class="flex flex-col gap-4 mt-8">
+<aside class="flex flex-col gap-4 mt-8" >
     <app-loader *ngIf="isloading" class="app-loader" />
     <h2 class="text-center font-bold text-4xl mb-1">
         Recent posts
     </h2>
-    <div *ngIf="!isloading" class=" px-6 py-8 flex flex-col gap-4 mt-1">
+    <div *ngIf="!isloading" class=" px-6 py-8 flex flex-col gap-4 mt-1" [@animate]="posts">
         
             <div *ngFor="let post of posts" class="border rounded-md px-4 py-4 flex flex-col grow transition-transform transform-gpu hover:scale-95  hover:shadow-inset shadow-hover bg-white">
                 <a routerLink={{post.themeId._id}}>
