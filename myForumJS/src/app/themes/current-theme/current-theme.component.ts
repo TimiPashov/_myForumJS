@@ -121,6 +121,7 @@ export class CurrentThemeComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.api.getTheme(params.get('themeId')).subscribe((theme) => {
         this.theme = theme;
+
         const ownerId = this.theme.userId;
         this.userService.getUser(ownerId).subscribe((user) => {
           this.themeOwnerDetails = user;

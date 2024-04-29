@@ -9,7 +9,8 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  isLogged:boolean = false;
   errorMessage: string = '';
   constructor(
     private userService: UserService,
@@ -36,5 +37,13 @@ export class LoginComponent {
         this.errorMessage = error.error.message;
       },
     );
+  }
+  ngOnInit(): void {
+    this.userService.isLoggedIn.subscribe((user) => {
+      this.isLogged = !!user;
+      if (this.isLogged) {
+        this.router.navigate(['/themes']);
+      }
+    });
   }
 }

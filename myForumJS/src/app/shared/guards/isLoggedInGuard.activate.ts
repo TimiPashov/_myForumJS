@@ -32,27 +32,9 @@ export class IsLoggedInGuard implements CanActivate {
         if (data) {
           return true;
         }
+        this.router.navigate(['/themes']);
         return false;
       }),
     );
   }
-
-  // if (
-  //   (route.url[0].path === 'login' || route.url[0].path === 'register') &&
-  //   this.userService.isLoggedIn === false
-  // ) {
-
-  //   return true;
-  // } else if (
-  //   (route.url[0].path === 'login' || route.url[0].path === 'register') &&
-  //   this.userService.isLoggedIn === true
-  // ) {
-  //   this.router.navigate(['/404']);
-  // }
-
-  // if (!this.userService.isLoggedIn) {
-  //   this.router.navigate(['/auth/login']);
-  // }
-
-  // return this.userService.isLoggedIn;
 }

@@ -46,7 +46,7 @@
         <p class="text-xl">
           <span class="font-bold text-2xl">{{ post.userId.username }}</span>
           posted on:
-          <time class="italic">{{ post.updatedAt | dateTransform }}</time>
+          <time class="italic">{{ post.created_at | dateTransform }}</time>
         </p>
       </header>
       <div class="flex gap-10">

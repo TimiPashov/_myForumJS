@@ -9,7 +9,7 @@
                                         routerLink="/home">Home</a></li>
                         <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125  hover:text-yellow-300"
                                         routerLink="/themes">Themes</a></li>
-                        <ng-container *ngIf="isLoggedIn">
+                        <ng-container *ngIf="islogged">
                                 <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125  hover:text-yellow-300"
                                                 routerLink="/themes/add-theme">Add Theme</a></li>
                                 <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125  hover:text-yellow-300"
@@ -18,7 +18,7 @@
                                                 class="text-2xl inline-block transition-transform transform-gpu hover:scale-125  hover:text-yellow-300"
                                                 href="javascript:void(0)">Logout</a></li>
                         </ng-container>
-                        <ng-container *ngIf="!isLoggedIn">
+                        <ng-container *ngIf="!islogged">
                                 <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125  hover:text-yellow-300"
                                                 routerLink="/auth/login">Login</a></li>
                                 <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125  hover:text-yellow-300"

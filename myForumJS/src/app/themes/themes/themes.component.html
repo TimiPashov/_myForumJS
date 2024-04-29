@@ -35,7 +35,7 @@
 
                         </div>
                         <div class="flex flex-col justify-between">
-                            <ng-container class="" *ngIf="isLoggedIn">
+                            <ng-container class="" *ngIf="isLogged">
                                 <button *ngIf="!isSubscribed(theme)" class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-green-100
                                     transition-transform transform-gpu hover:scale-105 hover:shadow-md"
                                     (click)="themeSubscribe(theme._id)">Subscribe</button>

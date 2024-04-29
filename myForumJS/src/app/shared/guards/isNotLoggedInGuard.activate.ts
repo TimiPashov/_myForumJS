@@ -26,34 +26,22 @@ export class IsNotLoggedInGuard implements CanActivate {
     return this.checkUserAccess();
   }
 
-  checkUserAccess() {
+  checkUserAccess(): Observable<boolean> {
     return this.userService.user$.pipe(
       take(1),
-      map((data) => {
-        if (data) {
+      map((user) => {
+        if (
+          localStorage.getItem('authUser') === undefined ||
+          sessionStorage.getItem('authUser') === undefined
+        ) {
+          return true;
+        }
+        if (user) {
+          this.router.navigate(['/themes']);
           return false;
         }
         return true;
       }),
     );
   }
-
-  // if (
-  //   (route.url[0].path === 'login' || route.url[0].path === 'register') &&
-  //   this.userService.isLoggedIn === false
-  // ) {
-
-  //   return true;
-  // } else if (
-  //   (route.url[0].path === 'login' || route.url[0].path === 'register') &&
-  //   this.userService.isLoggedIn === true
-  // ) {
-  //   this.router.navigate(['/404']);
-  // }
-
-  // if (!this.userService.isLoggedIn) {
-  //   this.router.navigate(['/auth/login']);
-  // }
-
-  // return this.userService.isLoggedIn;
 }

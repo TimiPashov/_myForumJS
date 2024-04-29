@@ -14,8 +14,8 @@ export class UserService implements OnDestroy {
   user: AuthUser | undefined;
   userSub: Subscription;
 
-  get isLoggedIn(): boolean {
-    return !!this.user;
+  get isLoggedIn() {
+    return this.user$;
   }
 
   constructor(
@@ -23,8 +23,14 @@ export class UserService implements OnDestroy {
     private router: Router,
   ) {
     this.userSub = this.user$.subscribe((user) => {
+      this.setUserLocalStorage(user);
       this.user = user;
     });
+  }
+
+  setUserLocalStorage(user: AuthUser | undefined) {
+    localStorage.setItem('authUser', JSON.stringify(user));
+    sessionStorage.setItem('authUser', JSON.stringify(user));
   }
 
   login(email: string, password: string) {
@@ -57,9 +63,13 @@ export class UserService implements OnDestroy {
   }
 
   logout() {
-    return this.http
-      .post('/api/logout', {})
-      .pipe(tap(() => this.user$$.next(undefined)));
+    return this.http.post('/api/logout', {}).pipe(
+      tap(() => {
+        localStorage.clear();
+        sessionStorage.clear();
+        this.user$$.next(undefined);
+      }),
+    );
   }
   getUser(userId: string) {
     return this.http.get<ProfileDetailsUser>(`/api/users/${userId}`);
@@ -78,6 +88,6 @@ export class UserService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.userSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
 }
