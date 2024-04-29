@@ -1,4 +1,4 @@
-<main>
+<main [@animate]="themes">
     <app-loader *ngIf="isLoading" class="app-loader" />
     <select class="border rounded-md p-1" id="dropdown-menu" #myMenu (change)="selected(myMenu.value)">
         <option value="" selected disabled>Sort by criteria</option>
@@ -7,7 +7,7 @@
         <option value="Subscribers">Subscribers</option>
         <option value="Name">Name</option>
     </select>
-    <div class="flex flex-col flex-grow flex-shrink flex-auto" [@animate]="themes">
+    <div class="flex flex-col flex-grow flex-shrink flex-auto" >
         <h2 class="mb-8 text-center font-bold text-4xl">
             Themes
         </h2>
