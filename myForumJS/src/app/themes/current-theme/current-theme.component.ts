@@ -1,9 +1,10 @@
+import { trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { listAnimation } from 'src/app/animations/postListAnimation';
 import { ApiService } from 'src/app/api.service';
 import { Post } from 'src/app/types/post';
-import { Theme } from 'src/app/types/theme';
 import { ProfileDetailsUser } from 'src/app/types/user';
 import { UserService } from 'src/app/user/user.service';
 
@@ -11,6 +12,9 @@ import { UserService } from 'src/app/user/user.service';
   selector: 'app-current-theme',
   templateUrl: './current-theme.component.html',
   styleUrls: ['./current-theme.component.css'],
+  animations:[
+    trigger('animate', listAnimation())
+  ]
 })
 export class CurrentThemeComponent implements OnInit {
   constructor(
