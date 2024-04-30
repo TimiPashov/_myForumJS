@@ -1,12 +1,12 @@
-<div class="h-[78vh] flex justify-center items-center text-2xl flex-wrap">
+<div class="mt-8 flex justify-center items-center text-2xl flex-wrap scale-90">
     <form class="rounded-md p-10 shadow-custom" [formGroup]="form" (ngSubmit)="register()">
 
-        <div class="flex flex-col">
-            <h2>Registration Form</h2>
+        <div class="flex flex-col ">
+            <h2 class="mb-8 font-bold self-center">Registration Form</h2>
 
             <!-- username -->
-            <div class="flex flex-col my-4">
-                <label for="username"></label>
+            <div class="flex flex-col my-4 text-xl">
+                <label for="username">Username:</label>
                 <input class="p-4 border border-black rounded-md my-2" type="text" name="username" id="username"
                     placeholder="Johny" formControlName="username">
             </div>
@@ -21,8 +21,8 @@
             </ng-container>
 
             <!-- email -->
-            <div class="flex flex-col my-4" class="field field-icon">
-                <label for="email"><span><i class="fas fa-envelope"></i></span></label>
+            <div class="flex flex-col my-4 text-xl">
+                <label for="email">Email:</label>
                 <input class="p-4 border border-black rounded-md my-2" type="email" name="email" id="email"
                     placeholder="john.doe@gmail.com" formControlName="email">
             </div>
@@ -36,8 +36,8 @@
             </ng-container>
 
             <!-- telephone -->
-            <div class="flex flex-col my-4">
-                <label for="tel"><span><i class="fas fa-phone"></i></span></label>
+            <div class="flex flex-col my-4 text-xl">
+                <label for="tel">Tel:</label>
                 <input class="p-4 border border-black rounded-md my-2" type="text" name="tel" id="tel"
                     placeholder="885 888 888" formControlName="tel">
             </div>
@@ -45,8 +45,8 @@
             <ng-container formGroupName="passGroup">
 
                 <!-- password -->
-                <div class="flex flex-col my-4">
-                    <label for="password"><span><i class="fas fa-lock"></i></span></label>
+                <div class="flex flex-col my-4 text-xl">
+                    <label for="password">Password:</label>
                     <input class="p-4 border border-black rounded-md my-2" type="password" name="password" id="password"
                         placeholder="Password" formControlName="password">
                 </div>
@@ -62,8 +62,8 @@
                 </ng-container>
 
                 <!-- rePassword -->
-                <div class="flex flex-col my-4">
-                    <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
+                <div class="flex flex-col my-4 text-xl">
+                    <label for="rePassword">Repeat password:</label>
                     <input class="p-4 border border-black rounded-md my-2" type="password" name="rePassword"
                         id="rePassword" placeholder="Repeat password" formControlName="rePassword">
                 </div>
