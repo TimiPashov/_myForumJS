@@ -30,7 +30,8 @@ export class CurrentThemeComponent implements OnInit {
 
   theme = {} as any;
   isEdit: boolean[] = [];
-  isLoading: boolean = true;
+  isLoading: boolean = false;
+  isPostLoading: boolean = false;
   themeOwnerDetails = {} as ProfileDetailsUser;
 
   user: ProfileDetailsUser = {
@@ -72,11 +73,12 @@ export class CurrentThemeComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
-
+    this.isPostLoading = true;
     return this.api
       .createPost(this.form.value.postText!, this.theme._id)
       .subscribe((theme) => {
         this.api.getTheme(theme._id).subscribe((theme) => (this.theme = theme));
+        this.isPostLoading = false;
         this.form.reset();
       });
   }
@@ -125,7 +127,7 @@ export class CurrentThemeComponent implements OnInit {
       email,
       tel,
     };
-
+    this.isLoading = true;
     this.route.paramMap.subscribe((params) => {
       this.api.getTheme(params.get('themeId')).subscribe((theme) => {
         this.theme = theme;

@@ -69,7 +69,7 @@
                 </div>
                 <ng-container *ngIf="form.get('passGroup')?.get('rePassword')?.touched">
                     <p *ngIf="!matchPasswords()" class="text-red-600 text-lg">
-                        Repeat Password does not match password!
+                        Passwords must match!
                     </p>
                 </ng-container>
             </ng-container>
