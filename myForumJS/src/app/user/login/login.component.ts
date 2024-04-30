@@ -19,9 +19,11 @@ export class LoginComponent implements OnInit {
   ) {}
 
   login(form: NgForm) {
+    
     if (!form) {
       return;
     }
+
 
     if (form.invalid) {
       Object.values(form.controls).forEach((control) => {
@@ -39,6 +41,7 @@ export class LoginComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         this.errorMessage = error.error.message;
+        this.isLoading = false;
       },
     );
   }

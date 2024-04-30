@@ -22,9 +22,12 @@
           [class.border-red-500]="emailInput?.invalid && emailInput?.touched"
         />
       </div>
-      <ng-container class="" *ngIf="emailInput.touched">
+      <ng-container class="" *ngIf="emailInput.touched && !isLoading">
         <p class="text-red-600 text-lg" *ngIf="emailInput.errors?.['required']">
           Email is required!
+        </p>
+        <p class="text-red-600 text-lg" *ngIf="emailInput.errors?.['email']">
+          Invalid email!
         </p>
       </ng-container>
 
@@ -38,14 +41,13 @@
           placeholder="******"
           ngModel
           required
-          minlength="4"
           #passwordInput="ngModel"
           [class.border-red-500]="
             passwordInput?.invalid && passwordInput?.touched
           "
         />
       </div>
-      <ng-container *ngIf="passwordInput.touched">
+      <ng-container *ngIf="passwordInput.touched && !isLoading">
         <p
           class="text-red-600 text-lg"
           *ngIf="passwordInput.errors?.['required']"
