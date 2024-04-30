@@ -10,6 +10,9 @@ export interface Post {
     "themeId": Theme,
     "created_at": string,
     "updatedAt": string,
-    "__v": number
+    "__v": number,
+    "showFullText"? : boolean,
+    'isLong'?:boolean,
+    'length'?:number,
 
 }

@@ -1,8 +1,5 @@
 <app-loader *ngIf="isLoading" class="app-loader" />
-<div
-  *ngIf="!isLoading"
-  class="flex flex-col justify-center items-center text-2xl flex-wrap"
->
+<div *ngIf="!isLoading" class="flex flex-col justify-center items-center text-2xl flex-wrap">
   <!-- theme-title  -->
   <div class="w-full p-6 mt-4 mb-2" [@animateEl]>
     <div class="flex flex-col">
@@ -19,14 +16,13 @@
               Created by:
               <span class="font-normal">{{
                 this.themeOwnerDetails.username
-              }}</span>
+                }}</span>
             </p>
           </div>
           <p class="self-end block mr-10 text-xl">
-            <span class="font-bold italic">Subscribers: </span
-            ><span class="text-3xl">{{
+            <span class="font-bold italic">Subscribers: </span><span class="text-3xl">{{
               theme.subscribers ? theme.subscribers.length : 0
-            }}</span>
+              }}</span>
           </p>
           <!-- <button class="subscribe">Subscribe</button>
                         <button class="unsubscribe">Unsubscribe</button> -->
@@ -36,14 +32,8 @@
   </div>
   <!-- comment  -->
   <div class="max-w-[90%] w-full flex flex-col" [@animate]="this.theme.posts">
-    <div
-      *ngFor="let post of this.theme.posts; let i = index"
-      id="{{ post._id }}"
-      class="max-w-[90%] w-full self-center"
-    >
-      <div
-        class="flex flex-col mt-6 p-6 flex-auto rounded-md shadow-inset bg-white break-words overflow-auto4"
-      >
+    <div *ngFor="let post of this.posts; let i = index" id="{{ post._id }}" class="max-w-[90%] w-full self-center">
+      <div class="flex flex-col mt-6 p-6 flex-auto rounded-md shadow-inset bg-white">
         <header class="text-center">
           <p class="text-xl">
             <span class="font-bold text-2xl">{{ post.userId.username }}</span>
@@ -53,84 +43,54 @@
         </header>
         <div class="flex gap-10">
           <div class="userdetails">
-            <img
-              class="max-h-40 self-center max-w-40 mb-4"
-              src="../../../assets/profile.png"
-              alt="avatar"
-            />
+            <img class="max-h-40 self-center max-w-40 mb-4" src="../../../assets/profile.png" alt="avatar" />
           </div>
           <div class="flex flex-col justify-center w-[70%] mt-6">
-            <form
-              *ngIf="isEdit[i]"
-              [formGroup]="editForm"
-              (ngSubmit)="editPost(i)"
-              class="flex flex-col gap-5"
-            >
+            <form *ngIf="isEdit[i]" [formGroup]="editForm" (ngSubmit)="editPost(i)" class="flex flex-col gap-5">
               <label for="postText">Edit post:</label>
-              <textarea
-                name="postText"
-                id="comment"
-                cols="30"
-                rows="5"
-                formControlName="postText"
-                class="border p-6"
-              ></textarea>
+              <textarea name="postText" id="comment" cols="30" rows="5" formControlName="postText"
+                class="border p-6"></textarea>
               <button
                 class="w-24 text-sm py-2 border border-black border-opacity-5 rounded-md bg-blue-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md self-center"
-                [disabled]="isPostLoading"
-              >
+                [disabled]="isPostLoading">
                 Submit
               </button>
             </form>
-            <ng-container
-              *ngIf="isEdit[i] && editForm.get('postText')?.touched"
-            >
-              <p
-                *ngIf="editForm.get('postText')?.errors?.['required']"
-                class="text-red-600 text-lg"
-              >
+            <ng-container *ngIf="isEdit[i] && editForm.get('postText')?.touched">
+              <p *ngIf="editForm.get('postText')?.errors?.['required']" class="text-red-600 text-lg">
                 Post text is required!
               </p>
-              <p
-                *ngIf="editForm.get('postText')?.errors?.['minlength']"
-                class="text-red-600 text-lg"
-              >
+              <p *ngIf="editForm.get('postText')?.errors?.['minlength']" class="text-red-600 text-lg">
                 Post must be at least 10 characters long!
               </p>
             </ng-container>
             <div *ngIf="!isEdit[i]" class="">
-              <p class="whitespace-pre-wrap">{{ post.text }}</p>
+              <p [ngClass]="
+                  post.showFullText
+                    ? 'whitespace-pre-wrap'
+                    : 'whitespace-pre-wrap max-h-64 overflow-hidden'">{{ post.text.trim() }}</p>
+              <button *ngIf="post.isLong" class="mt-2 text-blue-500" (click)="toggleShowFullText(post)">{{
+                post.showFullText ? "Show less" : "Show more" }}
+              </button>
             </div>
           </div>
         </div>
         <div class="self-end flex flex-col gap-2">
-          <button
-            *ngIf="isEdit[i]"
-            (click)="toggleEdit(i)"
-            class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-yellow-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md"
-          >
+          <button *ngIf="isEdit[i]" (click)="toggleEdit(i)"
+            class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-yellow-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md">
             Cancel
           </button>
-          <button
-            *ngIf="!isEdit[i] && isOwner(post.userId._id)"
-            (click)="toggleEdit(i)"
-            class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-yellow-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md"
-          >
+          <button *ngIf="!isEdit[i] && isOwner(post.userId._id)" (click)="toggleEdit(i)"
+            class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-yellow-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md">
             Edit
           </button>
-          <button
-            *ngIf="isOwner(post.userId._id)"
-            (click)="deletePost(post._id)"
-            class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-red-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md"
-          >
+          <button *ngIf="isOwner(post.userId._id)" (click)="deletePost(post._id)"
+            class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-red-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md">
             Delete
           </button>
-          <button
-            *ngIf="!hasLiked(post) && !isOwner(post.userId._id)"
-            (click)="likePost(post)"
+          <button *ngIf="!hasLiked(post) && !isOwner(post.userId._id)" (click)="likePost(post)"
             class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-blue-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md"
-            [disabled]="isPostLoading"
-          >
+            [disabled]="isPostLoading">
             Like
           </button>
           <p class="italic mt-4">
@@ -142,37 +102,20 @@
     <div class="mt-6 p-6 flex flex-col gap-4 self-center">
       <p class="font-bold">Add a comment:</p>
       <div class="answer">
-        <form
-          [formGroup]="form"
-          (ngSubmit)="addPost()"
-          class="flex flex-col gap-6"
-        >
-          <textarea
-            class="border p-5"
-            name="postText"
-            id="comment"
-            cols="50"
-            rows="5"
-            formControlName="postText"
-          ></textarea>
+        <form [formGroup]="form" (ngSubmit)="addPost()" class="flex flex-col gap-6">
+          <textarea class="border p-5" name="postText" id="comment" cols="50" rows="5"
+            formControlName="postText"></textarea>
           <ng-container *ngIf="form.get('postText')?.touched">
-            <p
-              *ngIf="form.get('postText')?.errors?.['required']"
-              class="text-red-600 text-lg"
-            >
+            <p *ngIf="form.get('postText')?.errors?.['required']" class="text-red-600 text-lg">
               Post text is required!
             </p>
-            <p
-              *ngIf="form.get('postText')?.errors?.['minlength']"
-              class="text-red-600 text-lg"
-            >
+            <p *ngIf="form.get('postText')?.errors?.['minlength']" class="text-red-600 text-lg">
               Post must be at least 10 characters long!
             </p>
           </ng-container>
           <button
             class="ml-4 text-sm py-2 border border-black border-opacity-5 max-w-[15%] self-center rounded-md bg-blue-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md px-4"
-            [disabled]="isPostLoading"
-          >
+            [disabled]="isPostLoading">
             Post
           </button>
         </form>

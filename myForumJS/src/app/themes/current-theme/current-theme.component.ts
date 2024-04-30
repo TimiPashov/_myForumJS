@@ -9,6 +9,7 @@ import {
 } from 'src/app/animations/postListAnimation';
 import { ApiService } from 'src/app/api.service';
 import { Post } from 'src/app/types/post';
+import { Theme } from 'src/app/types/theme';
 import { ProfileDetailsUser } from 'src/app/types/user';
 import { UserService } from 'src/app/user/user.service';
 
@@ -31,6 +32,7 @@ export class CurrentThemeComponent implements OnInit {
   ) {}
 
   theme = {} as any;
+  posts: Post[] = [];
   isEdit: boolean[] = [];
   isLoading: boolean = false;
   isPostLoading: boolean = false;
@@ -67,6 +69,10 @@ export class CurrentThemeComponent implements OnInit {
       this.route.paramMap.subscribe((params) => {
         this.api.getTheme(params.get('themeId')).subscribe((theme) => {
           this.theme = theme;
+          this.posts = theme.posts;
+          this.posts.forEach((post) => {
+            this.addLengthPropertyToPost(post);
+          });
           this.isPostLoading = false;
         });
       });
@@ -82,7 +88,13 @@ export class CurrentThemeComponent implements OnInit {
     return this.api
       .createPost(this.form.value.postText!, this.theme._id)
       .subscribe((theme) => {
-        this.api.getTheme(theme._id).subscribe((theme) => (this.theme = theme));
+        this.api.getTheme(theme._id).subscribe((theme) => {
+          this.theme = theme;
+          this.posts = theme.posts;
+          this.posts.forEach((post) => {
+            this.addLengthPropertyToPost(post);
+          });
+        });
         this.isPostLoading = false;
         this.form.reset();
       });
@@ -101,6 +113,10 @@ export class CurrentThemeComponent implements OnInit {
       .subscribe(() => {
         this.api.getTheme(this.theme._id).subscribe((theme) => {
           this.theme = theme;
+          this.posts = theme.posts;
+          this.posts.forEach((post) => {
+            this.addLengthPropertyToPost(post);
+          });
           this.isPostLoading = false;
           this.editForm.reset();
           this.toggleEdit(index);
@@ -111,9 +127,13 @@ export class CurrentThemeComponent implements OnInit {
   deletePost(postId: string) {
     if (window.confirm('Are you sure you want to delete this post?')) {
       this.api.deletePost(this.theme._id, postId).subscribe(() => {
-        this.api
-          .getTheme(this.theme._id)
-          .subscribe((theme) => (this.theme = theme));
+        this.api.getTheme(this.theme._id).subscribe((theme) => {
+          this.theme = theme;
+          this.posts = theme.posts;
+          this.posts.forEach((post) => {
+            this.addLengthPropertyToPost(post);
+          });
+        });
       });
     }
   }
@@ -124,6 +144,18 @@ export class CurrentThemeComponent implements OnInit {
     if (this.isEdit[index]) {
       const post = this.theme.posts[index];
       this.editForm.setValue({ postText: post.text });
+    }
+  }
+  toggleShowFullText(post: Post) {
+    post.showFullText = !post.showFullText;
+  }
+
+  addLengthPropertyToPost(post: Post) {
+    post.length = post.text.length;
+    if (post.length > 300) {
+      post.isLong = true;
+    } else {
+      post.isLong = false;
     }
   }
 
@@ -137,7 +169,14 @@ export class CurrentThemeComponent implements OnInit {
     this.isLoading = true;
     this.route.paramMap.subscribe((params) => {
       this.api.getTheme(params.get('themeId')).subscribe((theme) => {
+        //theme.userId is string, not an object
+        // console.log(theme);
+
         this.theme = theme;
+        this.posts = theme.posts;
+        this.posts.forEach((post) => {
+          this.addLengthPropertyToPost(post);
+        });
         // Scroll to the fragment after the theme has been loaded
         this.route.fragment.subscribe((fragment) => {
           if (fragment) {
@@ -147,8 +186,9 @@ export class CurrentThemeComponent implements OnInit {
             }, 0);
           }
         });
-
         const ownerId = this.theme.userId;
+        // console.log(JSON.stringify(ownerId));
+
         this.userService.getUser(ownerId).subscribe((user) => {
           this.themeOwnerDetails = user;
         });
@@ -157,4 +197,19 @@ export class CurrentThemeComponent implements OnInit {
       });
     });
   }
+  // user type usersId[] in themes comp from getAllThemes API call is an object
+
+  // ngAfterViewInit(): void {
+  //   this.postsContent.changes.subscribe(() => {
+  //     if (this.postsContent.length > 0) {
+  //       this.postsContent.forEach((item, index) => {
+  //         if (
+  //           item.nativeElement.scrollHeight > item.nativeElement.offsetHeight
+  //         ) {
+  //           this.posts[index].isLong = true;
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 }

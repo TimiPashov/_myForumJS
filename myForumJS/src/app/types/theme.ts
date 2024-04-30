@@ -14,6 +14,17 @@ export interface Theme {
 
 }
 
+export interface CurrentTheme{
+       "subscribers": String[],
+       "posts": Post[],
+       "_id": string,
+       "themeName": string,
+       "userId": string,
+       "created_at": string,
+       "updatedAt": string,
+       "__v": number
+}
+
 export interface ThemeForCreate {
        themeName: string,
        postText: string

@@ -11,9 +11,7 @@ import { mySort } from 'src/app/utils/themeSorter';
   selector: 'app-themes',
   templateUrl: './themes.component.html',
   styleUrls: ['./themes.component.css'],
-  animations: [
-    trigger('animate', listAnimation()),
-  ],
+  animations: [trigger('animate', listAnimation())],
 })
 export class ThemesComponent implements OnInit, OnDestroy {
   constructor(
