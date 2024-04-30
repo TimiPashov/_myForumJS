@@ -60,10 +60,12 @@ export class CurrentThemeComponent implements OnInit {
     if (this.hasLiked(post)) {
       return;
     }
+    this.isPostLoading = true;
     this.api.likePost(post._id).subscribe(() => {
       this.route.paramMap.subscribe((params) => {
         this.api.getTheme(params.get('themeId')).subscribe((theme) => {
           this.theme = theme;
+          this.isPostLoading = false;
         });
       });
     });

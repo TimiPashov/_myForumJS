@@ -128,6 +128,7 @@
             *ngIf="!hasLiked(post) && !isOwner(post.userId._id)"
             (click)="likePost(post)"
             class="text-sm py-2 border border-black border-opacity-5 rounded-md bg-blue-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md"
+            [disabled]="isPostLoading"
           >
             Like
           </button>
@@ -142,7 +143,7 @@
       <div class="answer">
         <form [formGroup]="form" (ngSubmit)="addPost()">
           <textarea
-            class="border"
+            class="border p-5"
             name="postText"
             id="comment"
             cols="50"
