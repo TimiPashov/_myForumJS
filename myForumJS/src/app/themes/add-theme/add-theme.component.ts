@@ -32,10 +32,16 @@ export class AddThemeComponent implements OnInit {
     }
 
     const { themeName, postText } = this.form.value;
-
+    //disable post button while the post is being created
+    this.form.disable();
     this.api.createTheme(themeName!, postText!).subscribe(() => {
       this.router.navigate(['/themes']);
+      this.form.enable();
     });
+  }
+
+  onCancel() {
+    this.router.navigate(['/themes']);
   }
 
   ngOnInit(): void {

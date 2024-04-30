@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { AuthUser, ProfileDetailsUser } from '../types/user';
-import { BehaviorSubject, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, Subscription, tap, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -72,19 +73,41 @@ export class UserService implements OnDestroy {
     );
   }
   getUser(userId: string) {
-    return this.http.get<ProfileDetailsUser>(`/api/users/${userId}`);
+    return this.http.get<ProfileDetailsUser>(`/api/users/${userId}`).pipe(
+      catchError((error) => {
+        console.error('An error occurred:', error);
+        return throwError(
+          () => new Error('Something bad happened; please try again later.'),
+        );
+      }),
+    );
   }
+
+  
 
   getProfile() {
     return this.http
       .get<AuthUser>('/api/users/profile')
-      .pipe(tap((user) => this.user$$.next(user)));
+      .pipe(
+        tap((user) => this.user$$.next(user)),
+        catchError(error => {
+          console.error('An error occurred:', error);
+          return throwError(() => new Error('Something bad happened; please try again later.'));
+        })
+      );
+      
   }
 
   updateProfile(username: string, email: string, tel?: string) {
     return this.http
       .put<AuthUser>('/api/users/profile', { username, email, tel })
-      .pipe(tap((user) => this.user$$.next(user)));
+      .pipe(tap((user) => this.user$$.next(user)),
+      catchError(error => {
+        console.error('An error occurred:', error);
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+      );
+    
   }
 
   ngOnDestroy(): void {

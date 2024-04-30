@@ -32,9 +32,9 @@
             </div>
             <div class="m-center mt-8 flex gap-8">
                 <button class="text-sm mt-4 mb-6 py-2 px-8 border border-black border-opacity-50 rounded-md m-auto
-                transition-transform transform-gpu hover:scale-110 hover:shadow-hover">Cancel</button>
+                transition-transform transform-gpu hover:scale-110 hover:shadow-hover" (click)="onCancel()">Cancel</button>
                 <button class="text-sm mt-4 mb-6 py-2 px-8 border border-black border-opacity-50 rounded-md m-auto
-                transition-transform transform-gpu hover:scale-110 hover:shadow-hover">Post</button>
+                transition-transform transform-gpu hover:scale-110 hover:shadow-hover" [disabled]="form.disabled">Post</button>
             </div>
 
         </form>
