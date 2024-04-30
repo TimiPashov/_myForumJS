@@ -71,6 +71,7 @@ export class CurrentThemeComponent implements OnInit {
 
   addPost() {
     if (!this.form.valid) {
+      this.form.markAllAsTouched();
       return;
     }
     this.isPostLoading = true;
