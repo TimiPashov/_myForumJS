@@ -19,6 +19,7 @@
           required
           email
           #emailInput="ngModel"
+          [class.border-red-500]="emailInput?.invalid && emailInput?.touched"
         />
       </div>
       <ng-container class="" *ngIf="emailInput.touched">
@@ -39,6 +40,9 @@
           required
           minlength="4"
           #passwordInput="ngModel"
+          [class.border-red-500]="
+            passwordInput?.invalid && passwordInput?.touched
+          "
         />
       </div>
       <ng-container *ngIf="passwordInput.touched">
