@@ -90,12 +90,14 @@ export class CurrentThemeComponent implements OnInit {
     }
     const postId = this.theme.posts[index]._id;
     const updatedText = this.editForm.value.postText;
+    this.isPostLoading = true;
 
     return this.api
       .editPost(this.theme._id, postId, updatedText!)
       .subscribe(() => {
         this.api.getTheme(this.theme._id).subscribe((theme) => {
           this.theme = theme;
+          this.isPostLoading = false;
           this.editForm.reset();
           this.toggleEdit(index);
         });
