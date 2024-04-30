@@ -35,10 +35,10 @@
     </div>
   </div>
   <!-- comment  -->
-  <div class="max-w-[90%] w-full" [@animate]="this.theme.posts">
+  <div class="max-w-[90%] w-full flex flex-col" [@animate]="this.theme.posts">
     <div
       *ngFor="let post of this.theme.posts; let i = index"
-      class="max-w-[90%] w-full">
+      class="max-w-[90%] w-full self-center">
       <div
         class="flex flex-col mt-6 p-6 flex-auto rounded-md shadow-inset bg-white break-words overflow-auto4">
         <header class="text-center">
@@ -136,10 +136,10 @@
         </div>
       </div>
     </div>
-    <div class="mt-6 p-6 flex flex-col gap-4">
+    <div class="mt-6 p-6 flex flex-col gap-4 self-center">
       <p class="font-bold">Add a comment:</p>
       <div class="answer">
-        <form [formGroup]="form" (ngSubmit)="addPost()">
+        <form [formGroup]="form" (ngSubmit)="addPost()" class="flex flex-col gap-6">
           <textarea
             class="border p-5"
             name="postText"
@@ -148,28 +148,27 @@
             rows="5"
             formControlName="postText"
           ></textarea>
+          <ng-container *ngIf="form.get('postText')?.touched">
+            <p
+              *ngIf="form.get('postText')?.errors?.['required']"
+              class="text-red-600 text-lg"
+            >
+              Post text is required!
+            </p>
+            <p
+              *ngIf="form.get('postText')?.errors?.['minlength']"
+              class="text-red-600 text-lg"
+            >
+              Post must be at least 10 characters long!
+            </p>
+          </ng-container>
           <button
-            class="ml-4 text-sm py-2 border border-black border-opacity-5 rounded-md bg-blue-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md px-4"
-            [disabled]="isPostLoading"
-          >
+            class="ml-4 text-sm py-2 border border-black border-opacity-5 max-w-[15%] self-center rounded-md bg-blue-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md px-4"
+            [disabled]="isPostLoading">
             Post
           </button>
         </form>
       </div>
-      <ng-container *ngIf="form.get('postText')?.touched">
-        <p
-          *ngIf="form.get('postText')?.errors?.['required']"
-          class="text-red-600 text-lg"
-        >
-          Post text is required!
-        </p>
-        <p
-          *ngIf="form.get('postText')?.errors?.['minlength']"
-          class="text-red-600 text-lg"
-        >
-          Post must be at least 10 characters long!
-        </p>
-      </ng-container>
     </div>
   </div>
 </div>
