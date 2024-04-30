@@ -38,9 +38,12 @@
   <div class="max-w-[90%] w-full flex flex-col" [@animate]="this.theme.posts">
     <div
       *ngFor="let post of this.theme.posts; let i = index"
-      class="max-w-[90%] w-full self-center">
+      id="{{ post._id }}"
+      class="max-w-[90%] w-full self-center"
+    >
       <div
-        class="flex flex-col mt-6 p-6 flex-auto rounded-md shadow-inset bg-white break-words overflow-auto4">
+        class="flex flex-col mt-6 p-6 flex-auto rounded-md shadow-inset bg-white break-words overflow-auto4"
+      >
         <header class="text-center">
           <p class="text-xl">
             <span class="font-bold text-2xl">{{ post.userId.username }}</span>
@@ -56,7 +59,7 @@
               alt="avatar"
             />
           </div>
-          <div class="flex flex-col justify-center w-[70%] mt-6 ">
+          <div class="flex flex-col justify-center w-[70%] mt-6">
             <form
               *ngIf="isEdit[i]"
               [formGroup]="editForm"
@@ -139,7 +142,11 @@
     <div class="mt-6 p-6 flex flex-col gap-4 self-center">
       <p class="font-bold">Add a comment:</p>
       <div class="answer">
-        <form [formGroup]="form" (ngSubmit)="addPost()" class="flex flex-col gap-6">
+        <form
+          [formGroup]="form"
+          (ngSubmit)="addPost()"
+          class="flex flex-col gap-6"
+        >
           <textarea
             class="border p-5"
             name="postText"
@@ -164,7 +171,8 @@
           </ng-container>
           <button
             class="ml-4 text-sm py-2 border border-black border-opacity-5 max-w-[15%] self-center rounded-md bg-blue-100 transition-transform transform-gpu hover:scale-105 hover:shadow-md px-4"
-            [disabled]="isPostLoading">
+            [disabled]="isPostLoading"
+          >
             Post
           </button>
         </form>

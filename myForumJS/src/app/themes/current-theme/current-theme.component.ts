@@ -1,4 +1,5 @@
 import { trigger } from '@angular/animations';
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -26,6 +27,7 @@ export class CurrentThemeComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private userService: UserService,
+    private viewportScroller: ViewportScroller,
   ) {}
 
   theme = {} as any;
@@ -136,6 +138,15 @@ export class CurrentThemeComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.api.getTheme(params.get('themeId')).subscribe((theme) => {
         this.theme = theme;
+        // Scroll to the fragment after the theme has been loaded
+        this.route.fragment.subscribe((fragment) => {
+          if (fragment) {
+            // Use a timeout to allow the DOM to update before scrolling
+            setTimeout(() => {
+              this.viewportScroller.scrollToAnchor(fragment);
+            }, 0);
+          }
+        });
 
         const ownerId = this.theme.userId;
         this.userService.getUser(ownerId).subscribe((user) => {
