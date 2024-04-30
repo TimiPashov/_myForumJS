@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   isLogged: boolean = false;
+  isLoading: boolean = false;
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -28,6 +29,7 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
 
@@ -38,10 +40,14 @@ export class RegisterComponent implements OnInit {
       tel,
     } = this.form.value;
 
+    //set isloading to true
+    this.isLoading = true;
     this.userService
       .register(username!, email!, password!, rePassword!, tel!)
       .subscribe(() => {
         this.router.navigate(['/themes']);
+        //setisLoading to false
+        this.isLoading = false;
       });
   }
 
