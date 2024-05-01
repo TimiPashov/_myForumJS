@@ -52,6 +52,7 @@ export class ThemesComponent implements OnInit, OnDestroy {
   }
 
   themeSubscribe(themeId: string) {
+    this.isLoading = true
     return this.api.subscribeTheme(themeId).subscribe(() => {
       this.api.getThemes().subscribe((themes) => {
         this.allThemes = themes;
@@ -60,10 +61,13 @@ export class ThemesComponent implements OnInit, OnDestroy {
           localStorage.getItem('selected') || 'Date',
         ).slice(this.startNumber, this.endNumber);
       });
+      this.isLoading = false;
     });
   }
 
+
   themeUnSubscribe(themeId: string) {
+    this.isLoading = true;
     return this.api.unSubscribeTheme(themeId).subscribe(() => {
       this.api.getThemes().subscribe((themes) => {
         this.allThemes = themes;
@@ -72,6 +76,7 @@ export class ThemesComponent implements OnInit, OnDestroy {
           localStorage.getItem('selected') || 'Date',
         ).slice(this.startNumber, this.endNumber);
       });
+      this.isLoading = false;
     });
   }
 
