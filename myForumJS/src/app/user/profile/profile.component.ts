@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../user.service';
+import { UserService } from '../../services/user.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfileDetailsUser } from 'src/app/types/user';
-import { ApiService } from 'src/app/api.service';
+import { ApiService } from 'src/app/services/theme.service';
 import { Theme } from 'src/app/types/theme';
+
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +15,7 @@ export class ProfileComponent implements OnInit {
   editView: boolean = false;
   subscriptions = [] as Theme[];
   userId: string = '';
+
 
   profileUser: ProfileDetailsUser = {
     username: '',
@@ -31,6 +33,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private api: ApiService,
+
   ) {}
 
   togleEddit(): void {

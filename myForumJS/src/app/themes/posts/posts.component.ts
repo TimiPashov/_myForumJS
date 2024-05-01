@@ -2,7 +2,7 @@ import { trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { listAnimation } from 'src/app/animations/postListAnimation';
-import { ApiService } from 'src/app/api.service';
+import { ApiService } from 'src/app/services/theme.service';
 import { Post } from 'src/app/types/post';
 
 

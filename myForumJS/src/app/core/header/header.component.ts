@@ -5,7 +5,7 @@ import {
   elementAnimation,
   logoAnimation,
 } from 'src/app/animations/postListAnimation';
-import { UserService } from 'src/app/user/user.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',

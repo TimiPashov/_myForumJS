@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable, map } from 'rxjs';
-import { UserService } from 'src/app/user/user.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Injectable({ providedIn: 'root' })
 export class IsLoggedInGuard implements CanActivate {

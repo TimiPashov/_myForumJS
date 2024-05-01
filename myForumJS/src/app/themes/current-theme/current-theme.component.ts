@@ -7,11 +7,12 @@ import {
   elementAnimation,
   listAnimation,
 } from 'src/app/animations/postListAnimation';
-import { ApiService } from 'src/app/api.service';
+import { ApiService } from 'src/app/services/theme.service';
 import { Post } from 'src/app/types/post';
 import { Theme } from 'src/app/types/theme';
 import { ProfileDetailsUser } from 'src/app/types/user';
-import { UserService } from 'src/app/user/user.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-current-theme',
@@ -29,6 +30,7 @@ export class CurrentThemeComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private viewportScroller: ViewportScroller,
+  
   ) {}
 
   theme = {} as any;

@@ -2,9 +2,9 @@ import { trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { listAnimation } from 'src/app/animations/postListAnimation';
-import { ApiService } from 'src/app/api.service';
+import { ApiService } from 'src/app/services/theme.service';
 import { Theme } from 'src/app/types/theme';
-import { UserService } from 'src/app/user/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { mySort } from 'src/app/utils/themeSorter';
 
 @Component({
