@@ -11,10 +11,9 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
 
-
+  //implement func to get filtered themes where user is subscribed
 
   getThemes() {
-
     return this.http.get<Theme[]>(`/api/themes`);
   }
 

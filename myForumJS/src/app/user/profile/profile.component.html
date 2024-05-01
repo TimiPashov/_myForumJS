@@ -15,6 +15,12 @@
                 <p class="font-bold">Phone: </p>
                 <p>{{profileUser.tel}}</p>
             </div>
+            <div class="flex flex-col gap-2">
+                <p class="font-bold">Your subscriptions: </p>
+                <a *ngFor="let subscription of subscriptions"
+                class="text-2xl inline-block transition-transform transform-gpu hover:scale-110  hover:text-yellow-300"
+                    routerLink="/themes/{{subscription._id}}">{{subscription.themeName}}</a>
+            </div>
             <div class="m-center mt-8 flex gap-8">
 
                 <button class="py-2 px-8 rounded-md text-sm border border-black border-opacity-50
