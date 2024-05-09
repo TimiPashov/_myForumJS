@@ -1,11 +1,29 @@
 <header class="h-64 p-8 flex justify-between items-center border-b w-full">
-        <div class="ml-20 transition-transform transform-gpu hover:scale-110" >
+        <div class="ml-20 transition-transform transform-gpu hover:scale-110">
                 <a class="text-5xl font-bold " @fadeIn routerLink="/home">_myForum<span
                                 class="text-8xl italic text-yellow-300">JS</span></a>
         </div>
+        <style>
+                @media (max-width: 591px) {
+                        header {
+                                font-size: 8px;
+                                flex-direction: column;
+                                justify-content: center;
+                                flex-wrap: nowrap;
+                                gap: 4em;
+                                margin-top: 2em;
+                                margin-bottom: 2em;
+                        }
+                        nav .home {
+                                display: none;
+                        }
+                }
+
+                
+        </style>
         <nav class="mr-20 ">
                 <ul class="flex flex-wrap items-center gap-12">
-                        <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125 hover:text-yellow-300"
+                        <li><a class="home text-2xl inline-block transition-transform transform-gpu hover:scale-125 hover:text-yellow-300"
                                         routerLink="/home">Home</a></li>
                         <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125  hover:text-yellow-300"
                                         routerLink="/themes">Themes</a></li>
@@ -13,7 +31,7 @@
                                 <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125  hover:text-yellow-300"
                                                 routerLink="/themes/add-theme">Add Theme</a></li>
                                 <li><a class="text-2xl inline-block transition-transform transform-gpu hover:scale-125  hover:text-yellow-300"
-                                                routerLink="/auth/profile">{{firstName}}'s Profile</a></li>
+                                                routerLink="/auth/profile">Profile</a></li>
                                 <li (click)="logout()"><a
                                                 class="text-2xl inline-block transition-transform transform-gpu hover:scale-125  hover:text-yellow-300"
                                                 href="javascript:void(0)">Logout</a></li>
